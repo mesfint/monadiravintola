@@ -1,7 +1,7 @@
 # Pizzeria Micro Frontend Application
 
 ## Overview
-Welcome to the Pizzeria Micro Frontend Application! This project is designed to showcase a modern web application architecture using micro frontends. The application simulates a pizza shop and is divided into the following independent micro frontends:
+Welcome to the Pizzeria Micro Frontend Application! This project is designed to showcase a modern web application architecture using micro frontends. The application simulates a pizza shop and is divided into the following independent micro frontends, thoough the application is organized in monorepo.  
 
 1. **Container**: The main application shell that integrates all the micro frontends.
 2. **Menu**: Displays the list of available pizzas and their details.
