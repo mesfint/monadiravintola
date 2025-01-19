@@ -1,11 +1,11 @@
-import MenuListWrapper from './components/MenuListWrapper';
+import AppContainer from './components/AppContainer';
 
 const App = () => {
   return (
     <>
     <h1>Welcome to Monadi Ravintola</h1>
   
-   <MenuListWrapper /> 
+   <AppContainer /> 
     </>
 
 )

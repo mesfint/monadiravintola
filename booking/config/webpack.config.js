@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/main.tsx',
   mode: 'development',
   devServer: {
-    port: 3001,
+    port: 3002,
     historyApiFallback: true,
   },
   resolve: {
@@ -32,10 +32,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'menu',
+      name: 'booking',
       filename: 'remoteEntry.js',
       exposes: {
-        './MenuList': './src/components/MenuList.tsx', // Ensure this path is correct
+        './BookTable': './src/components/BookTable.tsx', // Ensure this path is correct
       },
       shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
     }),

@@ -19,12 +19,12 @@ module.exports = {
   //   clean: true, // Clean output directory before each build
   // },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'], // Resolve TypeScript and JavaScript files
+    extensions: ['.tsx', '.ts', '.js', '.jsx'], // Resolve TypeScript and JavaScript files
   },
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/, // Handle TypeScript files
+        test: /\.(js|jsx|tsx|ts)$/,// Handle TypeScript files
         exclude: /node_modules/,
         use: 'babel-loader', // Use Babel for transpilation
       },
@@ -39,12 +39,16 @@ module.exports = {
       name: 'container', // Name of the container app
       filename: 'remoteEntry.js', // Output file for the container app
       remotes: {
-        MenuListHost: 'menu@http://localhost:3001/remoteEntry.js', // Remote module
-        // Add other remotes like feedback and booking if necessary
+        MenuListHost: 'menu@http://localhost:3001/remoteEntry.js', 
+        BookTableHost: 'booking@http://localhost:3002/remoteEntry.js', 
       },
       shared: {
         react: { singleton: true, eager: true }, // Share React as a singleton
-        'react-dom': { singleton: true, eager: true }, // Share ReactDOM as a singleton
+        'react-dom': {
+           singleton: true,
+            eager: true 
+          
+          }, // Share ReactDOM as a singleton
       },
     }),
     new HtmlWebpackPlugin({
