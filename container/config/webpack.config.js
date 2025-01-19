@@ -1,9 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
+require("dotenv").config('../.env');
+const webpack = require("webpack"); // only add this if you don't have yet
 
-module.exports = {
+
+
+module.exports =(env,argv)=>{
+  const isProduction = argv.mode === "production";
+return {
   entry: './src/main.tsx', // Entry point for the container app
+  mode: process.env.NODE_ENV || "development",
   mode: 'development', // Set the mode to development
   devServer: {
     port: 3000, // Port for the container app
@@ -39,8 +46,11 @@ module.exports = {
       name: 'container', // Name of the container app
       filename: 'remoteEntry.js', // Output file for the container app
       remotes: {
-        MenuListHost: 'menu@http://localhost:3001/remoteEntry.js', 
-        BookTableHost: 'booking@http://localhost:3002/remoteEntry.js', 
+        //MenuListHost: 'menu@http://localhost:3001/remoteEntry.js', 
+        MenuListHost: isProduction ? process.env.PROD_MENU : process.env.DEV_MENU,
+        BookTableHost: isProduction ? process.env.PROD_BOOKING : process.env.DEV_BOOKING,
+        FeedbackHost: isProduction ? process.env.PROD_FEEDBACK : process.env.DEV_FEEDBACK,
+        //FeedbackHost: 'feedback@http://localhost:3003/remoteEntry.js', 
       },
       shared: {
         react: { singleton: true, eager: true }, // Share React as a singleton
@@ -51,8 +61,12 @@ module.exports = {
           }, // Share ReactDOM as a singleton
       },
     }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html', // HTML template file
     }),
   ],
 };
+}
