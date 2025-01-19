@@ -1,50 +1,54 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
-  mode: 'development',
-  entry: path.resolve(__dirname, "src", "main.tsx"),
-    output: {
-      path: path.resolve(__dirname, ".dist"),
-      filename: 'main.bundle.js',
-  },
+  entry: './src/main.tsx', // Entry point for the container app
+  mode: 'development', // Set the mode to development
   devServer: {
+    port: 3000, // Port for the container app
+    historyApiFallback: true, // Fallback to index.html for SPA
     static: {
-      directory: path.resolve(__dirname, ".dist"),
+      directory: path.join(__dirname, 'dist'), // Serve static files from the output directory
     },
-    open: true,
-    port: 3000,
-    historyApiFallback: true,
+    hot: true, // Enable Hot Module Replacement
   },
+  // output: {
+  //   filename: '[name].[contenthash].js', // Naming convention for output files
+  //   path: path.resolve(__dirname, 'dist'), // Output directory
+  //   clean: true, // Clean output directory before each build
+  // },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js'], // Resolve TypeScript and JavaScript files
   },
-  
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: 'babel-loader',
+        test: /\.(ts|tsx)$/, // Handle TypeScript files
         exclude: /node_modules/,
+        use: 'babel-loader', // Use Babel for transpilation
+      },
+      {
+        test: /\.css$/, // Handle CSS imports
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'container',
-      filename: 'remoteEntry.js',
+      name: 'container', // Name of the container app
+      filename: 'remoteEntry.js', // Output file for the container app
       remotes: {
-        // Define micro frontends later
+        MenuListHost: 'menu@http://localhost:3001/remoteEntry.js', // Remote module
+        // Add other remotes like feedback and booking if necessary
       },
       shared: {
-        react: { singleton: true, eager: true },
-        'react-dom': { singleton: true, eager: true },
+        react: { singleton: true, eager: true }, // Share React as a singleton
+        'react-dom': { singleton: true, eager: true }, // Share ReactDOM as a singleton
       },
     }),
     new HtmlWebpackPlugin({
-      template: './index.html',
+      template: './public/index.html', // HTML template file
     }),
   ],
-  
 };

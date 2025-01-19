@@ -1,0 +1,217 @@
+{
+    "menu": {
+      "categories": {
+        "pizza": [
+          {
+            "name": "MARGHERITA",
+            "price": 11.50,
+            "image": "/public/assets/pizza1.jpg",
+            "description": {
+              "english": "San Marzano tomato sauce, mozzarella di Agerola, parmesan, and basil",
+              "finnish": "San Marzano tomaattikastike, mozzarella di Agerola, parmesan & basilika"
+            }
+          },
+          {
+            "name": "PUTTANESCA (VEGAN)",
+            "price": 12.50,
+            "image": "../assets/pizza2.jpg",
+            "description": {
+              "english": "San Marzano tomato sauce, capers, olives, red onion, garlic oil, oregano, and parsley",
+              "finnish": "San Marzano tomaattikastike, kapris, oliivi, punasipuli, valkosipuliöljy, oregano & persilja"
+            }
+          },
+          {
+            "name": "MEDITERRANEA",
+            "price": 14.00,
+            "image": "../assets/pizza3.jpg",
+            "description": {
+              "english": "San Marzano tomato sauce, cherry tomatoes, buffalo mozzarella, basil, and herb oil",
+              "finnish": "San Marzano tomaattikastike, kirsikkatomaatti, buffalo mozzarella, basilika & yrttiöljy"
+            }
+          },
+          {
+            "name": "PROSCIUTTO",
+            "price": 15.00,
+            "image": "../assets/pizza4.jpg",
+            "description": {
+              "english": "San Marzano tomato sauce, mozzarella di Agerola, arugula, prosciutto crudo, and parmesan",
+              "finnish": "San Marzano tomaattikastike, mozzarella di Agerola, rucola, prosciutto crudo & parmesan"
+            }
+            },
+          {
+            "name": "DIAVOLA",
+            "price": 15.00,
+            "image": "../assets/pizza5.jpg",
+            "description": {
+              "english": "San Marzano tomaattikastike, mozzarella di Agerola, spicy salame & persilja",
+              "finnish": "San Marzano tomato sauce, mozzarella di Agerola, spicy salame & parsley"
+            }
+            },
+          {
+            "name": "SALAME",
+            "price": 15.00,
+            "image": "../assets/pizza1.jpg",
+            "description": {
+              "english": "San Marzano tomaattikastike, mozzarella di Agerola, salame & persilja",
+              "finnish": "SaSan Marzano tomato sauce, mozzarella di Agerola, salame & parsley"
+            }
+          }
+          
+        ],
+        "whitePizza": [
+          {
+            "name": "DALL’ORTO",
+            "price": 14.00,
+            "image": "../assets/pizza2.jpg",
+            "description": {
+              "english": "Mozzarella di Agerola, parmesan, roasted peppers, roasted zucchini, grilled artichokes, mushrooms, parsley, and herb oil",
+              "finnish": "Mozzarella di Agerola, parmesan, paahdettu paprika, paahdettu kesäkurpitsa, grillattu artisokka, herkkusieni, persilja & yrttiöljy"
+            }
+          },
+          {
+            "name": "4 FORMAGGI PICCANTE",
+            "price": 15.00,
+            "image": "../assets/pizza3.jpg",
+            "description": {
+              "english": "Mozzarella di Agerola, blue cheese, parmesan, emmental, NDUJA-Calabrian salami, and parsley",
+              "finnish": "Mozzarella di Agerola, aurajuusto, parmesan, emmental, NDUJA-calabrian salame & persilja"
+            }
+          },
+          {
+            "name": "INFERNO",
+            "price": 14.00,
+            "image": "../assets/pizza4.jpg",
+            "description": {
+              "english": "Fior di latte mozzarella, spicy salame, cherry tomato, buffalo mozzarella, basil, chili",
+              "finnish": "Fior di latte mozzarella, spicy salame, kirsikkatomaatti, buffallo-mozarella, basilika, chili"
+            }
+          }
+          
+        ],
+        "kidsPizza": [
+          {
+            "name": "KIDS MARGHERITA",
+            "price": 6.00,
+            "image": "../assets/pizza1.jpg",
+            "description": {
+              "english": "San Marzano tomato sauce, mozzarella di Agerola",
+              "finnish": "San Marzano tomaattikastike, mozzarella di Agerola"
+            }
+          },
+          {
+            "name": "KIDS  HAM & ANANAS ",
+            "price": 7.00,
+            "image": "../assets/pizza3.jpg",
+            "description": {
+              "english": "San Marzano tomaattikastike, mozzarella di Agerola, kinkku & ananas",
+              "finnish": "San Marzano tomaattikastike, mozzarella di Agerola, kinkku ja ananas"
+            }
+          },
+          {
+            "name": "GLUTEENITON POHJA  ",
+            "price": 2.50,
+            "image": "../assets/pizza4.jpg",
+            "description": {
+              "english": "We bake gluten-free pizza with 100% gluten-free flour and use clean tools. However, we cannot guarantee that the gluten-free pizza is 100% gluten-free because we process regular wheat flour in the same kitchen. Please ask the staff for more information.",
+              "finnish": "Leivomme gluteenittoman pizzan 100% gluteenittomaan jauhoon ja käytämme puhtaita työvälineitä. Emme kuitenkaan voi taata että gluteeniton pizza on 100% gluteeniton koska käsittelemme tavallisia vehnäjauhoja samassa keittiössä. Kysythän lisää henkilökunnalta."
+            }
+          }
+          
+        ],
+        "pasta": [
+          {
+            "name": "PASTA ALLA ARRABIATTA (VEGAN)",
+            "price": 10.50,
+            "image": "../assets/pasta1.jpg",
+            "description": {
+              "english": "Pasta, tomato sauce, chili, cherry tomatoes, garlic, oregano, basil, and herb oil",
+              "finnish": "Pasta, tomaattikastike, chili, kirsikkatomaatti, valkosipuli, oregano, basilika & yrttiöljy"
+            }
+          },
+          
+          {
+            "name": "PASTA PESTO & POLLO (sis. Pinjansiemeniä)",
+            "price": 12.50,
+            "image": "../assets/pasta2.jpg",
+            "description": {
+              "english": "Pasta, pesto genovese, kanafile, parmesan & basilika",
+              "finnish": "Pasta, pesto genovese, kanafile, parmesaani ja basilika"
+            }
+          },
+          {
+            "name": "PASTA CARBONARA",
+            "price": 12.00,
+            "image": "../assets/pasta3.jpg",
+            "description": {
+              "english": "Pasta, guanciale, sipuli, kerma, kananmuna, parmesan, persilja & mustapippuri",
+              "finnish": "Pasta, guanciale, sipuli, kerma, kananmuna, parmesaani, persilja & mustapippuri"
+            }
+          },
+          {
+            "name": "PASTA SCAMPI E SPINACCI ",
+            "price": 14.00,
+            "image": "../assets/pasta1.jpg",
+            "description": {
+              "english": "Pasta, scampi, chili, valkosipuli, kirsikkatomatti, kerma, pinaatti & parmesan",
+              "finnish": "Pasta, scampi, chili, valkosipuli, kirsikkatomatti, kerma, pinaatti & parmesaani"
+            }
+          }
+          
+        ],
+        "dessert": [
+          {
+            "name": "TIRAMISU",
+            "price": 5.00,
+            "image": "../assets/pizza1.jpg",
+            "description": {
+                "finnish": "TIRAMISU"
+              }
+          },
+          {
+            "name": "PANNA COTTA",
+            "price": 5.00,
+            "image": "../assets/pizza2.jpg",
+            "description": {
+                "finnish": "PANNA COTTA"
+              }
+          }
+        ],
+        "drinks": [
+          {
+            "name": "Coca-Cola",
+            "volume": "330 ml",
+            "price": 3.00,
+            "image": "../assets/pasta1.jpg",
+            "description": {
+              "finnish": "tölkki"
+            },
+            "pricePerLiter": 9.09
+          },
+          {
+            "name": "Coca-Cola Zero",
+            "volume": "330 ml",
+            "price": 3.00,
+            "image": "../assets/pasta2.jpg",
+            "description": {
+              "finnish": "tölkki"
+            },
+            "pricePerLiter": 9.09
+          },
+          {
+            "name": "FANTA",
+            "volume": "330 ml",
+            "price": 3.00,
+            "image":"../assets/pasta3.jpg"
+          },
+          {
+            "name": "SANPELLEGRINO (aranciata rossa)",
+            "volume": "330 ml",
+            "price": 3.00,
+            "image": "../assets/pasta1.jpg"
+
+          }
+        ]
+      }
+    }
+  }
+  

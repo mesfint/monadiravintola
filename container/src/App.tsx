@@ -1,12 +1,15 @@
-import './App.css'
+import MenuListWrapper from './components/MenuListWrapper';
 
-function App() {
-
+const App = () => {
   return (
     <>
-     Container
+    <h1>Welcome to Monadi Ravintola</h1>
+  
+   <MenuListWrapper /> 
     </>
-  )
-}
 
-export default App
+)
+
+};
+
+export default App;

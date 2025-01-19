@@ -6,6 +6,8 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "include": ["src", "webpack.d.ts"], // Include the declaration file
+
 
     /* Bundler mode */
     "moduleResolution": "bundler",
