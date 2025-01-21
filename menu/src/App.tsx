@@ -1,11 +1,19 @@
 
-import PizzaGrid from "./components/PizzaGrid"
+import { ThemeProvider } from "@mui/material/styles";
+import globalTheme from "../../container/src/styles/globalTheme";
+import Hero from "./components/hero/Hero";
+import PizzaGrid from "./components/PizzaGrid";
+//import { menuTheme } from "./menuTheme"
+
 function App() {
 
   return (
     <>
-     <h2>i am Menu</h2>
+      <ThemeProvider theme={globalTheme}>
+      <Hero />
       <PizzaGrid />
+
+      </ThemeProvider>
 
     </>
   )

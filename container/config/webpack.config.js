@@ -1,72 +1,91 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { ModuleFederationPlugin } = require('webpack').container;
-require("dotenv").config('../.env');
-const webpack = require("webpack"); // only add this if you don't have yet
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { ModuleFederationPlugin } = require("webpack").container;
+//const webpack = require("webpack");
+const packageJson = require("../package.json");
 
+module.exports = (env, argv) => {
+  //const isProduction = argv.mode === "production";
 
+  return {
+    entry: "./src/main.tsx", // Entry point for the container app
+    mode:  "development",
 
-module.exports =(env,argv)=>{
-  const isProduction = argv.mode === "production";
-return {
-  entry: './src/main.tsx', // Entry point for the container app
-  mode: process.env.NODE_ENV || "development",
-  mode: 'development', // Set the mode to development
-  devServer: {
-    port: 3000, // Port for the container app
-    historyApiFallback: true, // Fallback to index.html for SPA
-    static: {
-      directory: path.join(__dirname, 'dist'), // Serve static files from the output directory
+    output: {
+      filename: "[name].[contenthash].js",
+      path: path.resolve(__dirname, "dist"),
+      clean: true,
+      publicPath: "auto",
     },
-    hot: true, // Enable Hot Module Replacement
-  },
-  // output: {
-  //   filename: '[name].[contenthash].js', // Naming convention for output files
-  //   path: path.resolve(__dirname, 'dist'), // Output directory
-  //   clean: true, // Clean output directory before each build
-  // },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'], // Resolve TypeScript and JavaScript files
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx|tsx|ts)$/,// Handle TypeScript files
-        exclude: /node_modules/,
-        use: 'babel-loader', // Use Babel for transpilation
+
+    devServer: {
+      port: 3000,
+      historyApiFallback: true,
+      static: {
+        directory: path.join(__dirname, "dist"),
       },
-      {
-        test: /\.css$/, // Handle CSS imports
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
-  plugins: [
-    new ModuleFederationPlugin({
-      name: 'container', // Name of the container app
-      filename: 'remoteEntry.js', // Output file for the container app
-      remotes: {
-        //MenuListHost: 'menu@http://localhost:3001/remoteEntry.js', 
-        MenuListHost: isProduction ? process.env.PROD_MENU : process.env.DEV_MENU,
-        BookTableHost: isProduction ? process.env.PROD_BOOKING : process.env.DEV_BOOKING,
-        FeedbackHost: isProduction ? process.env.PROD_FEEDBACK : process.env.DEV_FEEDBACK,
-        //FeedbackHost: 'feedback@http://localhost:3003/remoteEntry.js', 
-      },
-      shared: {
-        react: { singleton: true, eager: true }, // Share React as a singleton
-        'react-dom': {
-           singleton: true,
-            eager: true 
+      hot: true,
+    },
+
+    resolve: {
+      extensions: [".tsx", ".ts", ".js", ".jsx"],
+    },
+
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx|tsx|ts)$/,
+          exclude: /node_modules/,
+          use: "babel-loader",
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)$/i,
+          type: 'asset/resource',
+        },
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"],
+        },
+      ],
+    },
+
+    plugins: [
+      new ModuleFederationPlugin({
+        name: "container",
+        filename: "remoteEntry.js",
+        exposes: {
+          "./App": "./src/App", // Expose the container's main App
+          "./GlobalTheme": "./src/styles/globalTheme.ts",
+
+        },
+        remotes: {
+          MenuListHost: "menu@http://localhost:3001/remoteEntry.js",
+          BookTableHost: "booking@http://localhost:3002/remoteEntry.js",
+          FeedbackHost: "feedback@http://localhost:3003/remoteEntry.js",
+        },
+        shared: {
+          react: {
+            singleton: true,
+            eager: true,
+            requiredVersion: packageJson.dependencies.react,
+          },
+          "react-dom": {
+            singleton: true,
+            eager: true,
+            requiredVersion: packageJson.dependencies["react-dom"],
+          },
+          "@mui/material": "@mui/material", 
+          "@mui/icons-material": "@mui/icons-material",
           
-          }, // Share ReactDOM as a singleton
-      },
-    }),
-    new webpack.DefinePlugin({
-      "process.env": JSON.stringify(process.env),
-    }),
-    new HtmlWebpackPlugin({
-      template: './public/index.html', // HTML template file
-    }),
-  ],
+
+
+        },
+
+      }),
+
+      new HtmlWebpackPlugin({
+        template: "./public/index.html",
+      }),
+    ],
+  };
 };
-}

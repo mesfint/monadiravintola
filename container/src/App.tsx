@@ -1,11 +1,20 @@
-import AppContainer from './components/AppContainer';
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import AppContainer from "./components/AppContainer";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import globalTheme from "./styles/globalTheme";
 
 const App = () => {
   return (
     <>
-    <h1>Welcome to Monadi Ravintola</h1>
+    <ThemeProvider theme={globalTheme}>
+      <CssBaseline />
+      <Header />
+      <AppContainer />
+      <Footer />  
+    </ThemeProvider>
   
-   <AppContainer /> 
     </>
 
 )

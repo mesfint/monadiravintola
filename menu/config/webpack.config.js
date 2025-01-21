@@ -1,6 +1,8 @@
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+require("dotenv").config('../.env');
+const packageJson = require('../package.json');
 
 module.exports = {
   entry: './src/main.tsx',
@@ -10,13 +12,15 @@ module.exports = {
     historyApiFallback: true,
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js','.jsx'],
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx|tsx|ts)$/,
-        loader: 'babel-loader',
+        use: 'babel-loader',
+        //loader:'ts-loader',
+        
         exclude: /node_modules/,
       },
       {
@@ -28,6 +32,10 @@ module.exports = {
         test: /\.json$/,
         type: "json" // Built-in JSON loader for Webpack 5
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
@@ -37,7 +45,29 @@ module.exports = {
       exposes: {
         './MenuList': './src/components/MenuList.tsx', // Ensure this path is correct
       },
-      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+      remotes: {
+        container: "container@http://localhost:3000/remoteEntry.js",
+      },
+      shared: {
+         react: { singleton: true,
+          eager: true,
+          requiredVersion: packageJson.dependencies.react,
+          },
+       'react-dom': {
+         singleton: true, 
+          eager: true,
+          requiredVersion: packageJson.dependencies['react-dom'],
+        
+        },
+        "@mui/material": "@mui/material", 
+        "@mui/icons-material": "@mui/icons-material",
+        
+
+
+      },
+
+      
+    
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
