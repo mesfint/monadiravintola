@@ -8,29 +8,34 @@ const items = [
     name: "MARGHERITA",
     description: "San Marzano tomaattikastike, mozzarella di Agerola, parmesan & basilika",
     price: "11.50€",
-    bannerImage: "/assets/pizza1.png",
+    bannerImage: "http://localhost:3001/assets/pizza1.png",
   },
   {
     name: "PUTTANESCA (VEGAN)",
     description: "San Marzano tomaattikastike, kapris, oliivi, punasipuli, valkospuliöljy, oregano & persilja",
     price: "12.50€",
-    bannerImage: "/assets/pizza2.png",
+    bannerImage: "http://localhost:3001/assets/pizza2.png",
   },
   {
     name: "SALAME ",
     description: "San Marzano tomaattikastike, mozzarella di Agerola, salame & persilja",
     price: "15:00€",
-    bannerImage: "/assets/pizza3.png",
+    bannerImage: "http://localhost:3001/assets/pizza3.png",
   },
   {
     name: "DALL’ORTO ",
     description: "Mozzarella di Agerola, parmesan, paahdettu paprika, paahdettu kesäkurpitsa, grillattu artisokka, herkkusieni, persilja & yrttiöljy",
     price: "14:00€",
-    bannerImage: "/assets/pizza5.png",
+    bannerImage: "http://localhost:3001/assets/pizza5.png",
   },
 ];
 
-const Hero = () => {
+interface activeStepProps {
+  activeStep: number;
+  setActiveStep: (index: number) => void;
+}
+
+const Hero = (): JSX.Element => {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
@@ -43,11 +48,11 @@ const Hero = () => {
           indicators={false} // Disable default indicators
           navButtonsAlwaysInvisible
           cycleNavigation // Ensure automatic rotation
-          onChange={(index:number) => setActiveStep(index)} // Update active step dynamically
+          onChange={(now?: number) => now !== undefined && setActiveStep(now)} // Update active step dynamically
         >
           {items.map((item, index) => (
             <Paper key={index} sx={heroStyles.paper}>
-              <Box>
+              <Box sx={heroStyles.box}>
                 <Typography variant="h4" sx={heroStyles.title}>
                   {item.name}
                 </Typography>
@@ -55,7 +60,7 @@ const Hero = () => {
                   {item.description}
                 </Typography>
 
-                <Button className="CheckButton" variant="contained" color="secondary">
+                <Button  variant="contained" color="secondary">
                   Read More
                 </Button>
               </Box>

@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 
 
-const MenuList = lazy(() => import("MenuListHost/MenuList"));
+const Hero = lazy(() => import("MenuListHost/Hero"));
 const BookTable = lazy(() => import("BookTableHost/BookTable"));
 const FeedBackList = lazy(() => import("FeedbackHost/FeedBackList"));
 
@@ -10,7 +10,7 @@ const AppContainer = () => {
     <>
     
     <Suspense fallback={<div>Loading Menu...</div>}>
-      <MenuList />
+      <Hero />
       <BookTable />
       <FeedBackList />
     </Suspense>

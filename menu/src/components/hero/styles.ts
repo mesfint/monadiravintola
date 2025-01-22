@@ -1,7 +1,7 @@
 export const heroStyles = {
     heroContainer: {
         width: "100%",
-        height: "600px", // Ensure a proper height is set
+        height: "900px", // Ensure a proper height is set
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -15,15 +15,24 @@ export const heroStyles = {
     },
     paper: {
       display: "flex",
-      backgroundImage: "url('/assets/hero-bg.png')",
+      backgroundImage: "url('http://localhost:3001/assets/hero-bg.png')",
       justifyContent: "center",
       alignItems: "center",
       padding: "40px",
+      height: "500px",
       gap: "2rem",
       backgroundColor: "rgba(0, 0, 0, 0.7)", // Semi-transparent background
       color: "#FFF",
-      borderRadius: "10px",
-      border: "1px solid #D68240",
+      // borderRadius: "10px",
+      // border: "1px solid #D68240",
+    },
+    box:{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      alignItems: "left",
+      gap: "1rem",
+
     },
     title: {
       fontSize: "2rem",
