@@ -64,6 +64,9 @@ This project uses Workbox to enhance performance through caching. The service wo
 3. Check **Cache Storage** to see cached resources.
 4. Simulate offline mode in the **Network** tab and reload the page to verify offline functionality.
 
+### Figma Prototype
+[Prototype](https://github.com/mesfint/monadiravintola/blob/main/Desktop-monadi-restaurant.png)
+
 ## Contributing
 I welcome contributions! Please fork the repository and submit a pull request with your changes.
 
