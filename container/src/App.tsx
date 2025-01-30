@@ -1,19 +1,17 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import AppContainer from "./components/AppContainer";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Layout from "./components/layout/Layout";
 import globalTheme from "./styles/globalTheme";
-
+import { ErrorBoundary } from "./utils/errorBoundary";
 const App = () => {
   return (
     <>
+    <ErrorBoundary>
     <ThemeProvider theme={globalTheme}>
       <CssBaseline />
-      <Header />
-      <AppContainer />
-      <Footer />  
+      <Layout />
     </ThemeProvider>
+    </ErrorBoundary>
   
     </>
 

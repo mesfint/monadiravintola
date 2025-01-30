@@ -1,10 +1,21 @@
-import { createRoot } from "react-dom/client";
-import App from "./App";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
 
-const root = document.getElementById("root");
+const mount = () => {
+  const container = document.getElementById('root');
 
-if (root) {
-  createRoot(root).render(<App />);
-}
+  if (!container) {
+    throw new Error('Failed to find the root element');
+  }
 
+  const root = createRoot(container);
 
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+};
+
+mount();
