@@ -1,23 +1,25 @@
-import { lazy, Suspense } from "react";
+import { Suspense, lazy } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
+const Hero = lazy(() => import("MenuHost/Hero"));
+const Menu = lazy(() => import("MenuHost/Menu"));
 
-const Hero = lazy(() => import("MenuListHost/Hero"));
-const BookTable = lazy(() => import("BookTableHost/BookTable"));
-const FeedBackList = lazy(() => import("FeedbackHost/FeedBackList"));
+const ErrorFallback = () => (
+  <div>Something went wrong loading the component</div>
+);
+
+const LoadingFallback = () => (
+  <div>Loading...</div>
+);
 
 const AppContainer = () => {
   return (
-    <>
-    
-    <Suspense fallback={<div>Loading Menu...</div>}>
-      <Hero />
-      <BookTable />
-      <FeedBackList />
-    </Suspense>
-    
-    
-    
-    </>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Suspense fallback={<LoadingFallback />}>
+        <Hero />
+        <Menu />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 

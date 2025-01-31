@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "composite": true,
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "include": ["src", "webpack.d.ts"], // Include the declaration file
 
 
     /* Bundler mode */
@@ -24,5 +23,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "../feedback/src/menuTheme.tsx"]
+  "include": ["src/**/*", "src/webpack.d.ts"]  
 }

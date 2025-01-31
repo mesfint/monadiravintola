@@ -59,9 +59,10 @@ module.exports = (env, argv) => {
 
         },
         remotes: {
+          MenuHost: "menu@http://localhost:3001/remoteEntry.js",
           MenuListHost: "menu@http://localhost:3001/remoteEntry.js",
-          BookTableHost: "booking@http://localhost:3002/remoteEntry.js",
-          FeedbackHost: "feedback@http://localhost:3003/remoteEntry.js",
+          // BookTableHost: "booking@http://localhost:3002/remoteEntry.js",
+          // FeedbackHost: "feedback@http://localhost:3003/remoteEntry.js",
         },
         shared: {
           react: {

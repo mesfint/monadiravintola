@@ -44,11 +44,13 @@ const Footer: FC = () => {
                 Contact
               </Typography>
               <Typography variant="body2">
-                123 Pizza Street
+              Saarnraiviontie 1
+              <br />
+              02770 Espoo
                 <br />
-                Helsinki, Finland
+                 Finland
                 <br />
-                Tel: +358 123 456 789
+                Tel: +358 401 247 491
               </Typography>
             </FooterSection>
           </Grid>
@@ -59,9 +61,11 @@ const Footer: FC = () => {
                 Opening Hours
               </Typography>
               <Typography variant="body2">
-                Monday - Friday: 11:00 - 22:00
+              Monday Closed
                 <br />
-                Saturday - Sunday: 12:00 - 23:00
+                TU - WE: 16:00 - 22:00                <br />
+                THR - SAT: 11:00 - 22:00               <br />
+                SUN: 11:00 - 21:00
               </Typography>
             </FooterSection>
           </Grid>

@@ -44,6 +44,8 @@ module.exports = {
       filename: 'remoteEntry.js',
       exposes: {
         './Hero': './src/components/hero/Hero.tsx', // Ensure this path is correct
+        './Menu': './src/components/menu/Menu.tsx', // Ensure this path is correct
+        
       },
       remotes: {
         container: "container@http://localhost:3000/remoteEntry.js",

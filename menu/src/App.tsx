@@ -2,7 +2,7 @@
 import { ThemeProvider } from "@mui/material/styles";
 import globalTheme from "../../container/src/styles/globalTheme";
 import Hero from "./components/hero/Hero";
-import PizzaGrid from "./components/PizzaGrid";
+import Menu from "./components/menu/Menu";
 //import { menuTheme } from "./menuTheme"
 
 function App() {
@@ -11,7 +11,8 @@ function App() {
     <>
       <ThemeProvider theme={globalTheme}>
       <Hero />
-      <PizzaGrid />
+      <Menu />
+      {/* <PizzaGrid /> */}
 
       </ThemeProvider>
 

@@ -1,7 +1,7 @@
 {
     "menu": {
       "categories": {
-        "pizza": [
+        "pizzas": [
           {
             "name": "MARGHERITA",
             "price": 11.50,
@@ -58,7 +58,7 @@
           }
           
         ],
-        "whitePizza": [
+        "whitePizzas": [
           {
             "name": "DALL’ORTO",
             "price": 14.00,
@@ -88,7 +88,7 @@
           }
           
         ],
-        "kidsPizza": [
+        "kidsPizzas": [
           {
             "name": "KIDS MARGHERITA",
             "price": 6.00,
@@ -99,7 +99,7 @@
             }
           },
           {
-            "name": "KIDS  HAM & ANANAS ",
+            "name": "KIDS  HAM & ANANAS",
             "price": 7.00,
             "image": "/assets/pizza2.png",
             "description": {
@@ -108,7 +108,7 @@
             }
           },
           {
-            "name": "GLUTEENITON POHJA  ",
+            "name": "GLUTEENITON POHJA",
             "price": 2.50,
             "image": "/assets/pizza3.png",
             "description": {
@@ -118,7 +118,7 @@
           }
           
         ],
-        "pasta": [
+        "pastas": [
           {
             "name": "PASTA ALLA ARRABIATTA (VEGAN)",
             "price": 10.50,
@@ -158,7 +158,7 @@
           }
           
         ],
-        "dessert": [
+        "desserts": [
           {
             "name": "TIRAMISU",
             "price": 5.00,
