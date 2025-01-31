@@ -1,5 +1,6 @@
-import { CATEGORY_NAMES, Language, MenuCategory, MenuItem, ViewType } from "./menu";
-
-export type { Language, MenuCategory, MenuItem, ViewType };
-
-    export { CATEGORY_NAMES };
+export type {
+    Language, MenuCategories,
+    MenuData, MenuItem, ViewType
+} from './menu';
+  
+  export { CATEGORY_NAMES } from './menu';

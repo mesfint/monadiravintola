@@ -191,7 +191,7 @@
             "name": "Coca-Cola Zero",
             "volume": "330 ml",
             "price": 3.00,
-            "image": "/assets/pasta2.png",
+            "image": "/assets/coca_cola_zero.jpg",
             "description": {
               "finnish": "tölkki"
             },
@@ -201,7 +201,7 @@
             "name": "FANTA",
             "volume": "330 ml",
             "price": 3.00,
-            "image":"/assets/pasta3.png"
+            "image":"/assets/fanta.jpeg"
           },
           {
             "name": "SANPELLEGRINO (aranciata rossa)",
