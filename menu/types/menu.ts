@@ -18,7 +18,7 @@ export interface MenuCategories {
   desserts: MenuItem[];
   drinks: MenuItem[];
 }
-
+//entire menu data
 export interface MenuData {
   menu: {
     categories: MenuCategories;
@@ -27,6 +27,8 @@ export interface MenuData {
 
 export type ViewType = 'grid' | 'list';
 export type Language = 'english' | 'finnish';
+
+
 
 export const CATEGORY_NAMES = {
   pizzas: "Pizzas",

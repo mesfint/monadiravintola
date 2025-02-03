@@ -20,13 +20,33 @@ const MenuList: FC = () => {
         backgroundColor: '#1a1a1a', // Match Hero background
         pb: 8 // Space at bottom
       }}>
-        <Grid container spacing={3}>
+        <Grid  container 
+          spacing={3}
+          columns={{ xs: 12, sm: 12, md: 12 }}
+        
+        >
           {items.map((item: MenuItem, index: number) => (
-            <Grid key={index} xs={12} sm={6} md={4}>
-              <MenuItemCard 
-                item={item} 
-                viewType={viewType}
-              />
+            <Grid  xs={12} 
+            sm={6} 
+            md={4} 
+            key={index}
+            sx={{
+              display: 'flex',
+              height: '100%'
+            }}
+            >
+             <Box sx={{ 
+                width: '100%',
+                display: 'flex',
+                '& > *': { // Target the card directly
+                  flex: 1
+                }
+              }}>
+                <MenuItemCard 
+                  item={item} 
+                  viewType={viewType}
+                />
+              </Box>
             </Grid>
           ))}
         </Grid>

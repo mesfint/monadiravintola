@@ -6,7 +6,9 @@
   "private": true,
   "workspaces": ["container", "menu", "feedback", "booking"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:full": "pnpm run build && git add . && git commit -m \"UI build update\" && git push"
+
   },
   "keywords": [],
   "author": "",

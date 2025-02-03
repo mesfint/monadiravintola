@@ -185,6 +185,7 @@ const WoltButton = styled(Button)(({ theme }) => ({
   color: 'white',
   padding: '12px 32px',
   fontSize: '1.1rem',
+  target: '_blank',
   animation: `${fadeIn} 0.8s ease-out forwards`,
   animationDelay: '0.4s',
   opacity: 0,
@@ -306,8 +307,8 @@ const Hero: FC = () => {
                 </HeroDescription>
                 <WoltButton
                   variant="contained"
-                  href="https://wolt.com/fi/fin"
-                  target="_blank"
+                  href="https://wolt.com/fi/fin/espoo/restaurant/monadi"
+                  
                   rel="noopener noreferrer"
                 >
                   Order via Wolt
