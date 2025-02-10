@@ -1,195 +1,222 @@
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import StarIcon from '@mui/icons-material/Star';
-import { Box, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { reviews as reviewsData } from '../data/reviews'; // Import the reviews data
 import { Review } from '../types/review';
+
 const CarouselContainer = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: '1200px',
   margin: '0 auto',
   padding: theme.spacing(4),
   backgroundColor: '#0A1316',
-  borderRadius: theme.spacing(2),
+  position: 'relative',
+  overflow: 'hidden',
+  zIndex: 1,
+  isolation: 'isolate'
+}));
+
+const ReviewsTrack = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  transition: 'transform 0.5s ease-in-out',
+  gap: theme.spacing(2), // Add gap between cards
+  willChange: 'transform',
+  width: '100%',
   position: 'relative',
 }));
 
 const ReviewCard = styled(Box)(({ theme }) => ({
-  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-  borderRadius: theme.spacing(2),
-  padding: theme.spacing(4),
-  margin: theme.spacing(1),
-  border: '1px solid rgba(255, 255, 255, 0.1)',
-  transition: 'transform 0.3s ease',
-  minHeight: '300px',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
+  flex: '0 0 calc(33.333% - 16px)', // Adjust for gap
+  minWidth: 'calc(33.333% - 16px)', // Ensure cards don't shrink
+  [theme.breakpoints.down('md')]: {
+    flex: '0 0 calc(50% - 16px)',
+    minWidth: 'calc(50% - 16px)',
+  },
+  [theme.breakpoints.down('sm')]: {
+    flex: '0 0 calc(100% - 16px)',
+    minWidth: 'calc(100% - 16px)',
+  },
 }));
 
-const DotIndicator = styled(Box)<{ active?: boolean }>(({ theme, active }) => ({
-  width: 8,
-  height: 8,
-  borderRadius: '50%',
-  backgroundColor: active ? '#D68240' : 'rgba(255, 255, 255, 0.3)',
-  margin: '0 4px',
-  cursor: 'pointer',
-  transition: 'background-color 0.3s ease',
+const ReviewContent = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+  borderRadius: theme.spacing(2),
+  padding: theme.spacing(2.5),
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  textAlign: 'center',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: -2,
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '80px',
+    height: '4px',
+    backgroundColor: '#D68240',
+    borderRadius: '2px',
+  },
 }));
+
+// const defaultReviews: Review[] = [
+//   {
+//     id: '1',
+//     author: 'Mikael Winqvist',
+//     text: 'Super good food and friendly restaurant owner. Will definitely come back.',
+//     ratings: { food: 5, service: 5, atmosphere: 4 },
+//     date: 'a month ago',
+//     source: 'Google review'
+//   },
+  
+// ];
 
 interface ReviewCarouselProps {
   reviews?: Review[];
 }
 
-// Sample default review data
-const defaultReviews: Review[] = [
-  {
-    id: '1',
-    author: 'Mikael Winqvist',
-    text: 'Super good food and friendly restaurant owner. Will definitely come back.',
-    ratings: {
-      food: 5,
-      service: 5,
-      atmosphere: 4
-    },
-    date: 'a month ago',
-    source: 'Google review'
-  },
-  // Add more default reviews here
-];
+const ReviewCarousel: FC<ReviewCarouselProps> = ({ reviews = reviewsData }) => {
+  const [position, setPosition] = useState(0);
+  const [clonedReviews, setClonedReviews] = useState<Review[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
 
-const ReviewCarousel: FC<ReviewCarouselProps> = ({ reviews = defaultReviews }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  if (!reviews || reviews.length === 0) {
-    return (
-      <Box sx={{ 
-        textAlign: 'center', 
-        p: 4, 
-        color: 'white',
-        backgroundColor: '#0A1316',
-        borderRadius: 2
-      }}>
-        <Typography>No reviews available</Typography>
-      </Box>
-    );
-  }
+  useEffect(() => {
+    //wait for the component to be mounted
+    setIsVisible(true);
+    // Clone reviews for infinite scroll - triple the array
+    const cloned = [...reviews, ...reviews, ...reviews];
+    setClonedReviews(cloned);
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % reviews.length);
-  };
+    // Log to verify cloning
+    console.log('Cloned reviews:', cloned.length);
+  }, [reviews]);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
-  };
+  useEffect(() => {
+    if (!isVisible) return;
 
-  const handleDotClick = (index: number) => {
-    setCurrentIndex(index);
-  };
+    const interval = setInterval(() => {
+      setPosition((prev) => {
+        const next = prev + 1;
+        // Reset position when reaching the end of first set
+        if (next >= reviews.length) {
+          //reset position to the first review
+          setTimeout(() => {
+            setPosition(0);
+          }, 0);
+          return prev;
+        }
+        return next;
+      });
 
-  const currentReview = reviews[currentIndex];
+      
+      //console.log('Current position:', position);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [reviews.length, isVisible]);
+
+  // Calculate the translation percentage based on position
+  const translateX = -(position * (100 / 3 + 1.4)); // Adjust for gap
+
+  //console.log('Transform value:', translateX);
 
   return (
+    <Box sx={{ width: '100%', overflow: 'hidden' }}>
     <CarouselContainer>
-    <Typography 
-      variant="h4" 
-      component="h2" 
-      align="center"
-      sx={{ 
-        color: '#D68240',
-        mb: 4,
-        fontWeight: 600
-      }}
-    >
-      Customer Reviews
-    </Typography>
+      <Typography 
+        variant="h4" 
+        component="h2" 
+        align="center"
+        sx={{ 
+          color: '#D68240',
+          mb: 4,
+          fontWeight: 600
+        }}
+      >
+        Customer Reviews
+      </Typography>
 
-    {currentReview && (
-      <ReviewCard>
-        <Box>
-          <Typography variant="h6" sx={{ color: '#D68240', mb: 2 }}>
-            {currentReview.author}
-          </Typography>
-          
-          <Typography sx={{ color: 'white', mb: 3, lineHeight: 1.8 }}>
-            {currentReview.text}
-          </Typography>
-        </Box>
+      <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+      <ReviewsTrack
+         sx={{
+          transform: `translateX(${translateX}%)`,
+          opacity: isVisible ? 1 : 0,
+          transition: 'transform 0.5s ease-in-out, opacity 0.3s ease-in-out',
+        }}
+      >
+        {clonedReviews.map((review, index) => (
+          <ReviewCard key={`${review.id}-${index}`}>
+            <ReviewContent>
+              <FormatQuoteIcon 
+                sx={{ 
+                  color: '#D68240',
+                  fontSize: '2rem',
+                  mb: 1
+                }}
+              />
+              
+              <Typography 
+                sx={{ 
+                  color: 'white',
+                  mb: 2,
+                  lineHeight: 1.6,
+                  flex: 1,
+                  fontSize: '0.9rem',
+                  overflow: 'hidden',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 4, // Limit to 4 lines
+                  WebkitBoxOrient: 'vertical',
+                }}
+              >
+                {review.text}
+              </Typography>
 
-        <Box>
-          <Box sx={{ mb: 2 }}>
-            {currentReview.ratings && (
-              <>
-                <Typography component="div" sx={{ color: 'white', mb: 1 }}>
-                  Food: {Array.from({ length: currentReview.ratings.food }).map((_, i) => (
-                    <StarIcon key={i} sx={{ color: '#D68240', fontSize: '1.2rem' }} />
-                  ))}
-                </Typography>
-                <Typography component="div" sx={{ color: 'white', mb: 1 }}>
-                  Service: {Array.from({ length: currentReview.ratings.service }).map((_, i) => (
-                    <StarIcon key={i} sx={{ color: '#D68240', fontSize: '1.2rem' }} />
-                  ))}
-                </Typography>
-                {currentReview.ratings.atmosphere && (
-                  <Typography component="div" sx={{ color: 'white', mb: 1 }}>
-                    Atmosphere: {Array.from({ length: currentReview.ratings.atmosphere }).map((_, i) => (
-                      <StarIcon key={i} sx={{ color: '#D68240', fontSize: '1.2rem' }} />
-                    ))}
-                  </Typography>
-                )}
-              </>
-            )}
-          </Box>
+              <Box sx={{ mb: 1 }}>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <StarIcon 
+                    key={i}
+                    sx={{ 
+                      color: i < (review.ratings.food || 0) ? '#D68240' : 'rgba(255,255,255,0.2)',
+                      fontSize: '1rem'
+                    }}
+                  />
+                ))}
+              </Box>
 
-          <Box sx={{ 
-            display: 'flex', 
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            color: 'rgba(255, 255, 255, 0.7)'
-          }}>
-            <Typography variant="caption">
-              {currentReview.date}
-            </Typography>
-            <Typography variant="caption">
-              {currentReview.source}
-            </Typography>
-          </Box>
-        </Box>
-      </ReviewCard>
-    )}
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  color: '#D68240',
+                  fontWeight: 600,
+                  fontSize: '0.95rem'
+                }}
+              >
+                {review.author}
+              </Typography>
 
-    {reviews.length > 1 && (
-      <Box sx={{ 
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        mt: 3,
-        gap: 2
-      }}>
-        <IconButton onClick={handlePrev} sx={{ color: 'white' }}>
-          <NavigateBeforeIcon />
-        </IconButton>
-        
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          {reviews.map((_, index) => (
-            <DotIndicator
-              key={index}
-              active={index === currentIndex}
-              onClick={() => handleDotClick(index)}
-            />
-          ))}
-        </Box>
-
-        <IconButton onClick={handleNext} sx={{ color: 'white' }}>
-          <NavigateNextIcon />
-        </IconButton>
+              <Typography 
+                variant="caption"
+                sx={{ 
+                  color: 'rgba(255,255,255,0.7)',
+                  mt: 0.5,
+                  fontSize: '0.75rem'
+                }}
+              >
+                {review.source} • {review.date}
+              </Typography>
+            </ReviewContent>
+          </ReviewCard>
+        ))}
+        </ReviewsTrack>
       </Box>
-    )}
-  </CarouselContainer>
-);
+    </CarouselContainer>
+    </Box>
+  );
 };
 
 export default ReviewCarousel;

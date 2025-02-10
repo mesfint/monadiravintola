@@ -17,6 +17,7 @@ const getRemoteUrls = () => {
       MenuListHost: process.env.DEV_MENU,
       // BookTableHost: process.env.DEV_BOOKING,
        FeedbackHost: process.env.DEV_FEEDBACK,
+       
     };
   }
   return process.env.CONTAINER_URL || 'container@http://localhost:3000/remoteEntry.js';

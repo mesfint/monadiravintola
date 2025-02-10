@@ -44,7 +44,8 @@ module.exports = {
       name: 'feedback',
       filename: 'remoteEntry.js',
       exposes: {
-        './ReviewCarousel': './src/components/ReviewCarousel.tsx', // Ensure this path is correct
+        './ReviewCarousel': './src/components/ReviewCarousel.tsx',
+        './reviewsData': './src/data/reviews.ts',
       },
       shared: {
         react: { singleton: true,

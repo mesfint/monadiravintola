@@ -23,6 +23,8 @@ const StyledCard = styled(Card, {
   flexDirection: viewType === 'grid' ? 'column' : 'row',
   height: viewType === 'grid' ? '100%' : 'auto',
   width: '100%',
+  //padding: '30px',
+  //margin: '10px 0',
   backgroundColor: 'rgba(0, 0, 0, 0.8)',
   color: 'white',
   transition: 'transform 0.3s ease-in-out',
@@ -60,19 +62,22 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
   onError={() => setImageError(true)}
   sx={viewType === 'grid' ? {
     width: '100%',
-    height: '200px',
+    height: '180px',
     maxHeight: {
-      xs: '200px',
-      sm: '220px',
-      md: '180px',
-      lg: '160px'  // Even smaller for large screens
+      xs: '160px',
+        sm: '180px',
+        md: '200px',
+        lg: '220px'
     },
-    objectFit: 'cover',
+    objectFit: 'contain',
     objectPosition: 'center',
+    padding: { xs: '4px', sm: '8px', md: '12px' },
+
+    //border: '1px solid #D68240'
   } : {
     // List view remains unchanged
-    width: { xs: '120px', sm: '140px' },
-    height: '140px',
+    width: { xs: '100px', sm: '120px', md: '140px' },
+    height: { xs: '100px', sm: '120px', md: '140px' },
     objectFit: 'cover',
     flexShrink: 0,
   }}
@@ -80,25 +85,33 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
       <CardContent 
         sx={{ 
           flex: 1,
-          p: 2,
+          p: { xs: 1, sm: 1.5, md: 2 }, // Responsive padding
           display: 'flex',
+          //border: '1px solid rgb(251, 9, 29)',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          minHeight: viewType === 'grid' ? (isDrink ? '120px' : '180px') : 'auto',
-        }}
+          minHeight: viewType === 'grid' ? 
+        (isDrink ? { xs: '100px', sm: '120px', md: '140px' } : 
+                  { xs: '140px', sm: '160px', md: '180px' }) : 
+        'auto',
+    }}
       >
         <Box>
           <Box sx={{ 
             display: 'flex', 
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            mb: 1 
+            mb: { xs: 0.5, sm: 1 } 
           }}>
             <Typography 
               variant="h6" 
               sx={{ 
                 color: '#D68240',
-                fontSize: isDrink ? '1rem' : '1.1rem',
+                fontSize: {
+                  xs: isDrink ? '0.9rem' : '1rem',
+                  sm: isDrink ? '1rem' : '1.1rem',
+                  md: isDrink ? '1.1rem' : '1.2rem'
+                },
                 flex: 1
               }}
             >
@@ -110,7 +123,8 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
                 sx={{ 
                   color: 'grey.500',
                   ml: 1,
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.8rem' }
                 }}
               >
                 {item.volume}
@@ -127,7 +141,7 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
                 WebkitLineClamp: viewType === 'list' ? 2 : (isDrink ? 2 : 3),
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
-                mb: 2,
+                mb: { xs: 1, sm: 1.5, md: 2 },
                 minHeight: viewType === 'grid' ? (isDrink ? '40px' : '60px') : 'auto',
               }}
             >
@@ -144,12 +158,19 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
             mt: isDrink ? 1 : 'auto'
           }}
         >
-          <Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            
+          }}>
             <Typography 
               variant="h6" 
               sx={{ 
                 color: '#D68240',
-                fontSize: isDrink ? '1rem' : (viewType === 'list' ? '1rem' : '1.25rem')
+                fontSize: {
+                  xs: isDrink ? '0.9rem' : (viewType === 'list' ? '0.9rem' : '1.1rem'),
+                  sm: isDrink ? '1rem' : (viewType === 'list' ? '1rem' : '1rem')
+                }
               }}
             >
               {item.price.toFixed(2)} €
@@ -177,6 +198,13 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
               '&:hover': {
                 backgroundColor: '#c47538',
               },
+              fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.9rem' },
+              padding: { 
+                xs: '2px 6px', 
+                sm: '4px 10px', 
+                md: '8px 16px' 
+              },
+              width: { xs: '100%', sm: 'auto' } // Full width on mobile
             }}
           >
             Order on Wolt

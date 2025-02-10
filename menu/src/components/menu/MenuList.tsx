@@ -6,6 +6,11 @@ import menuData from '../../data/menu.json';
 import { useMenu } from '../../utils/useMenu';
 import MenuItemCard from './MenuItemCard';
 
+
+
+
+
+
 const MenuList: FC = () => {
   const { activeCategory, viewType } = useMenu();
   const typedMenuData = menuData as MenuData;
@@ -13,44 +18,53 @@ const MenuList: FC = () => {
 
   if (viewType === 'grid') {
     return (
-      <Box sx={{ 
-        mt: 8, // More space from tabs
-        px: 2,
-        minHeight: '100vh',
-        backgroundColor: '#1a1a1a', // Match Hero background
-        pb: 8 // Space at bottom
-      }}>
-        <Grid  container 
-          spacing={3}
-          columns={{ xs: 12, sm: 12, md: 12 }}
+      <Box sx={{ flexGrow: 1, p: 2 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      {items.map((item: MenuItem, index: number) => (
+          <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
+            <Box sx={{ height: '100%', p: 1, spacing: { xs: 1, sm: 2, md: 3 } }}>
+            <MenuItemCard 
+              item={item} 
+              viewType={viewType}
+            />
+          </Box>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+      // <Box sx={{ 
+      //   mt: 8, // More space from tabs
+      //   px: 2,
+      //   minHeight: '100vh',
+      //   backgroundColor: '#1a1a1a', // Match Hero background
+      //   pb: 8 // Space at bottom
+      // }}>
+      //   <Grid container 
+      //     spacing={3}
+      //     columns={{ xs: 12, sm: 12, md: 12 }}
         
-        >
-          {items.map((item: MenuItem, index: number) => (
-            <Grid  xs={12} 
-            sm={6} 
-            md={4} 
-            key={index}
-            sx={{
-              display: 'flex',
-              height: '100%'
-            }}
-            >
-             <Box sx={{ 
-                width: '100%',
-                display: 'flex',
-                '& > *': { // Target the card directly
-                  flex: 1
-                }
-              }}>
-                <MenuItemCard 
-                  item={item} 
-                  viewType={viewType}
-                />
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      //   >
+      //     {items.map((item: MenuItem, index: number) => (
+      //        <Grid component="div" 
+      //        key={index}
+             
+      //      >
+      //        <Box sx={{ 
+      //           width: '100%',
+      //           display: 'flex',
+      //           '& > *': { // Target the card directly
+      //             flex: 1
+      //           }
+      //         }}>
+      //           <MenuItemCard 
+      //             item={item} 
+      //             viewType={viewType}
+      //           />
+      //         </Box>
+      //       </Grid>
+      //     ))}
+      //   </Grid>
+      // </Box>
     );
   }
 
