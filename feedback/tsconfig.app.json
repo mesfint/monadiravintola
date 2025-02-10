@@ -22,5 +22,4 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
-}
+  "include": ["src/**/*", "src/webpack.d.ts", "types/**/*"]  }

@@ -1,15 +1,34 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { ModuleFederationPlugin } = require("webpack").container;
-//const webpack = require("webpack");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
+
+dotenv.config();
 const packageJson = require("../package.json");
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
+const getRemoteUrls = () => {
+  if (isDevelopment) {
+    return {
+      MenuHost: process.env.DEV_MENU,
+      MenuListHost: process.env.DEV_MENU,
+      // BookTableHost: process.env.DEV_BOOKING,
+       FeedbackHost: process.env.DEV_FEEDBACK,
+    };
+  }
+  return process.env.CONTAINER_URL || 'container@http://localhost:3000/remoteEntry.js';
+};
+
 
 module.exports = (env, argv) => {
   //const isProduction = argv.mode === "production";
 
   return {
     entry: "./src/main.tsx", // Entry point for the container app
-    mode:  "development",
+    mode: isDevelopment ? 'development' : 'production',
 
     output: {
       filename: "[name].[contenthash].js",
@@ -19,7 +38,7 @@ module.exports = (env, argv) => {
     },
 
     devServer: {
-      port: 3000,
+      port: process.env.PORT || 3000,
       historyApiFallback: true,
       static: {
         directory: path.join(__dirname, "dist"),
@@ -48,6 +67,26 @@ module.exports = (env, argv) => {
         },
       ],
     },
+    performance: {
+      hints: isDevelopment ? false : 'warning',
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000,
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        minSize: 20000,
+        maxSize: 244000,
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+          },
+        },
+      },
+      runtimeChunk: false,
+    },
 
     plugins: [
       new ModuleFederationPlugin({
@@ -58,12 +97,7 @@ module.exports = (env, argv) => {
           "./GlobalTheme": "./src/styles/globalTheme.ts",
 
         },
-        remotes: {
-          MenuHost: "menu@http://localhost:3001/remoteEntry.js",
-          MenuListHost: "menu@http://localhost:3001/remoteEntry.js",
-          // BookTableHost: "booking@http://localhost:3002/remoteEntry.js",
-          // FeedbackHost: "feedback@http://localhost:3003/remoteEntry.js",
-        },
+        remotes: getRemoteUrls(),
         shared: {
           react: {
             singleton: true,
@@ -83,10 +117,23 @@ module.exports = (env, argv) => {
         },
 
       }),
+      // new webpack.DefinePlugin({
+      //   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      // }),
 
       new HtmlWebpackPlugin({
         template: "./public/index.html",
       }),
+      // Copy assets to dist folder
+      new CopyWebpackPlugin({
+        patterns: [
+          { 
+            from: 'public/assets',
+            to: 'assets'
+          }
+        ]
+      })
+
     ],
   };
 };

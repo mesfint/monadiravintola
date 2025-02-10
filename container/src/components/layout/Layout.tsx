@@ -3,6 +3,7 @@ import { FC } from 'react';
 import AppContainer from '../AppContainer';
 import Footer from './Footer';
 import Header from './Header';
+import RestaurantStory from './RestaurantStory';
 
 const Layout: FC = () => {
   return (
@@ -24,6 +25,7 @@ const Layout: FC = () => {
         }}
       >
         <AppContainer />
+        <RestaurantStory />
       </Box>
       <Footer />
     </Box>

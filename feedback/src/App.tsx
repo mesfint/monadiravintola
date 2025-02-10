@@ -1,14 +1,12 @@
 
-import './App.css'
-
-function App() {
-
+import ReviewCarousel from './components/ReviewCarousel';
+import { reviews } from './data/reviews';
+const App = () => {
   return (
-    <>
-      <h2>Feedback</h2>
-      
-    </>
-  )
-}
+    //<ThemeProvider theme={globalTheme}>
+      <ReviewCarousel reviews={reviews} />
+    //</ThemeProvider>
+  );
+};
 
-export default App
+export default App;

@@ -1,16 +1,39 @@
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-require("dotenv").config('../.env');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+//require("dotenv").config('../.env');
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+
+//Load env
+dotenv.config();
 const packageJson = require('../package.json');
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
+//Get container url
+const getContainerUrl = () => {
+  if (isDevelopment) {
+    return process.env.DEV_CONTAINER;
+  }
+  return process.env.CONTAINER_URL || 'container@http://localhost:3000/remoteEntry.js';
+};
 
 module.exports = {
   entry: './src/main.tsx',
-  mode: 'development',
-  devServer: {
-    port: 3001,
-    historyApiFallback: true,
+  mode: isDevelopment ? 'development' : 'production',
+  output: {
+    filename: isDevelopment ? '[name].js' : '[name].[contenthash].js',
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: isDevelopment ? 'auto' : '/menu/',
+    clean: true,
   },
+  devServer: isDevelopment ? {
+    port: process.env.PORT || 3001,
+    historyApiFallback: true,
+    hot: true,
+  } : undefined,
   resolve: {
     extensions: ['.tsx', '.ts', '.js','.jsx'],
   },
@@ -39,16 +62,20 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.PORT': JSON.stringify(process.env.PORT),
+    }),
     new ModuleFederationPlugin({
       name: 'menu',
       filename: 'remoteEntry.js',
       exposes: {
-        './Hero': './src/components/hero/Hero.tsx', // Ensure this path is correct
-        './Menu': './src/components/menu/Menu.tsx', // Ensure this path is correct
+        './Hero': './src/components/hero/Hero.tsx', 
+        './Menu': './src/components/menu/Menu.tsx', 
         
       },
       remotes: {
-        container: "container@http://localhost:3000/remoteEntry.js",
+        container: getContainerUrl(),
       },
       shared: {
          react: { singleton: true,

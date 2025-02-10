@@ -6,9 +6,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.config.js",
-    "build": "pnpm clean &&  cross-env NODE_ENV=production  webpack build --config config/webpack.config.js",
-    "deploy:full": " git add . && git commit -m \"UI build update\" && git push",
-
+    "build": "pnpm clean && cross-env NODE_ENV=production webpack --config config/webpack.config.js",
+    "serve": "cross-env NODE_ENV=production serve dist -p 3001",
+    "deploy:full": "git add . && git commit -m \"UI build update\" && git push" ,
     "dev": "vite",
     "lint": "eslint .",
     "preview": "vite preview"

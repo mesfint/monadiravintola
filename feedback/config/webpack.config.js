@@ -2,6 +2,9 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+
+const packageJson = require('../package.json');
+
 module.exports = {
   entry: './src/main.tsx',
   mode: 'development',
@@ -16,7 +19,9 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx|tsx|ts)$/,
-        loader: 'babel-loader',
+        use: 'babel-loader',
+        //loader:'ts-loader',
+        
         exclude: /node_modules/,
       },
       {
@@ -28,6 +33,10 @@ module.exports = {
         test: /\.json$/,
         type: "json" // Built-in JSON loader for Webpack 5
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
@@ -35,9 +44,39 @@ module.exports = {
       name: 'feedback',
       filename: 'remoteEntry.js',
       exposes: {
-        './FeedBackList': './src/components/FeedBackList.tsx', // Ensure this path is correct
+        './ReviewCarousel': './src/components/ReviewCarousel.tsx', // Ensure this path is correct
       },
-      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+      shared: {
+        react: { singleton: true,
+         eager: true,
+         requiredVersion: packageJson.dependencies.react,
+         },
+      'react-dom': {
+        singleton: true, 
+         eager: true,
+         requiredVersion: packageJson.dependencies['react-dom'],
+       
+       },
+       '@mui/material': { 
+        singleton: true,
+        requiredVersion: packageJson.dependencies['@mui/material'],
+      },
+      '@mui/icons-material': { 
+        singleton: true,
+        requiredVersion: packageJson.dependencies['@mui/icons-material'],
+      },
+      '@emotion/react': { 
+        singleton: true,
+        requiredVersion: packageJson.dependencies['@emotion/react'],
+      },
+      '@emotion/styled': { 
+        singleton: true,
+        requiredVersion: packageJson.dependencies['@emotion/styled'],
+      },
+       
+
+
+     },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
