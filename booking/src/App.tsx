@@ -1,12 +1,12 @@
 
 import './App.css'
-import BookTable from './components/BookTable'
+import BookingModal from './components/BookingModal'
 
 function App() {
 
   return (
     <>
-      <BookTable />
+      <BookingModal open={true} onClose={() => {}} />
     </>
   )
 }

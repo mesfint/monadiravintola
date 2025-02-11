@@ -8,7 +8,7 @@ const App = () => {
     <>
     <ErrorBoundary>
     <ThemeProvider theme={globalTheme}>
-      <CssBaseline />
+      <CssBaseline />{/* reset css */}
       <Layout />
     </ThemeProvider>
     </ErrorBoundary>

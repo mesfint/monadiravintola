@@ -7,7 +7,11 @@ module.exports = {
   mode: 'development',
   devServer: {
     port: 3002,
+    hot: true,
     historyApiFallback: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -35,10 +39,18 @@ module.exports = {
       name: 'booking',
       filename: 'remoteEntry.js',
       exposes: {
-        './BookTable': './src/components/BookTable.tsx', // Ensure this path is correct
+        './BookingModal': './src/components/BookingModal.tsx', 
       },
-      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
-    }),
+      shared: {
+        react: { singleton: true, eager: true },
+        'react-dom': { singleton: true, eager: true },
+        '@mui/material': { singleton: true },
+        '@mui/icons-material': { singleton: true },
+        '@emotion/react': { singleton: true },
+        '@emotion/styled': { singleton: true },
+        'dayjs': { singleton: true },
+      },
+        }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: "index.html",

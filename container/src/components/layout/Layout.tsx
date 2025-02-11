@@ -1,9 +1,12 @@
 import { Box } from '@mui/material';
 import { FC } from 'react';
+import { globalTheme } from '../../styles/globalTheme';
 import AppContainer from '../AppContainer';
 import Footer from './Footer';
 import Header from './Header';
 import RestaurantStory from './RestaurantStory';
+
+
 
 const Layout: FC = () => {
   return (
@@ -12,7 +15,7 @@ const Layout: FC = () => {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
-        bgcolor: 'background.default'
+        bgcolor: globalTheme.palette.primary.main
       }}
     >
       <Header />
@@ -26,6 +29,7 @@ const Layout: FC = () => {
       >
         <AppContainer />
         <RestaurantStory />
+
       </Box>
       <Footer />
     </Box>

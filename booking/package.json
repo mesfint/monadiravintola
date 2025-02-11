@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.config.js",
-    "build": "cross-env NODE_ENV=production  webpack build --config config/webpack.config.js",
-    "dev": "vite",
     "clean": "rm -rf dist",
+    "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.config.js",
+    "build": "pnpm clean && cross-env NODE_ENV=production webpack --config config/webpack.config.js",
+    "serve": "cross-env NODE_ENV=production serve dist -p 3001",
+    "deploy:full": "git add . && git commit -m \"UI build update\" && git push",
+    "dev": "vite",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -17,7 +19,9 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.3.1",
     "@mui/material": "^6.3.1",
+    "@mui/x-date-pickers": "^7.26.0",
     "css-loader": "^7.1.2",
+    "dayjs": "^1.11.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",
@@ -25,7 +29,7 @@
     "webpack-merge": "^6.0.1"
   },
   "devDependencies": {
-   "@babel/core": "^7.26.0",
+    "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",

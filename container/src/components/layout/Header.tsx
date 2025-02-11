@@ -14,8 +14,12 @@ import {
   useTheme
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { FC, useState } from 'react';
+import { FC, lazy, Suspense, useState } from 'react';
 import logoPath from "../../assets/LOGO.png";
+
+const BookingModal = lazy(() => import("BookingHost/BookingModal"));
+
+
 
 
 
@@ -46,8 +50,16 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 const Header: FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const handleMenuItemClick = (item: string) => {
+    if (item === 'Book Table') {
+      setBookingOpen(true);
+    }
+    handleDrawerToggle();
+  };
 
   const menuItems = ['Menu', 'Book Table', 'Feedback'];
 
@@ -89,7 +101,7 @@ const Header: FC = () => {
         {menuItems.map((item) => (
           <ListItem 
             key={item} 
-            onClick={handleDrawerToggle} // Close drawer when item is clicked
+            onClick={()=>handleMenuItemClick(item)} 
             sx={{
               justifyContent: 'center',
               py: 2,
@@ -114,6 +126,7 @@ const Header: FC = () => {
     </Box>
   );
   return (
+    <>
     <AppBar 
     position="fixed"
     sx={{
@@ -159,6 +172,7 @@ const Header: FC = () => {
             {menuItems.map((item) => (
               <Typography
                 key={item}
+                onClick={()=>handleMenuItemClick(item)}
                 sx={{ 
                   cursor: 'pointer',
                   color: 'white',
@@ -219,6 +233,15 @@ const Header: FC = () => {
         {drawer}
       </Drawer>
     </AppBar>
+    <Suspense fallback={null}>
+        {bookingOpen && (
+          <BookingModal 
+            open={bookingOpen} 
+            onClose={() => setBookingOpen(false)} 
+          />
+        )}
+      </Suspense>
+    </>
   );
 };
 

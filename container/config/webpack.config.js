@@ -15,7 +15,7 @@ const getRemoteUrls = () => {
     return {
       MenuHost: process.env.DEV_MENU,
       MenuListHost: process.env.DEV_MENU,
-      // BookTableHost: process.env.DEV_BOOKING,
+      BookingHost: process.env.DEV_BOOKING,
        FeedbackHost: process.env.DEV_FEEDBACK,
        
     };
