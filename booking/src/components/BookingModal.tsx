@@ -24,6 +24,14 @@ import dayjs, { Dayjs } from 'dayjs';
 import { useState } from 'react';
 import { BookingModalProps } from '../types/booking';
 
+const TEST_CONFIG = {
+  WHATSAPP_NUMBERS: {
+    RESTAURANT: '+358440646044', // Current number
+    TEST_1: '+1234567890',       // Test number 1
+    TEST_2: '+0987654321',       // Test number 2
+  },
+  ACTIVE_NUMBER: '+358468946609' // Change this to test different numbers-eyuel
+};
 
 
 
@@ -85,8 +93,13 @@ Please reply to confirm this booking.
     `);
 
     // Replace with restaurant's actual WhatsApp number
-    const whatsappUrl = `https://wa.me/+358440646044?text=${message}`;
+    const whatsappUrl = `https://wa.me/${TEST_CONFIG.ACTIVE_NUMBER}?text=${message}`;
     
+
+    // Log the test information
+    console.log('Sending booking to:', TEST_CONFIG.ACTIVE_NUMBER);
+    console.log('Message:', decodeURIComponent(message));
+
     // Open WhatsApp in a new window
     window.open(whatsappUrl, '_blank');
     
@@ -94,6 +107,8 @@ Please reply to confirm this booking.
     setActiveStep(1);
     setConfirmationSent(true);
   };
+
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
   const steps = ['Booking Details', 'Confirmation'];
 
@@ -141,7 +156,7 @@ Please reply to confirm this booking.
       }}
     >
       <DialogTitle sx={{ 
-        bgcolor: 'primary.main', 
+        bgcolor: 'palette.primary.main', 
         color: 'white',
         textAlign: 'center' 
       }}>
