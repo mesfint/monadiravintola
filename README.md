@@ -73,3 +73,46 @@ I welcome contributions! Please fork the repository and submit a pull request wi
 
 ## Acknowledgments
 Special thanks to all contributors and the open-source community for their support.
+
+
+
+```js
+
+new ModuleFederationPlugin({
+name: "container",
+filename: "remoteEntry.js",
+exposes: {
+"./App": "./src/App",
+"./GlobalTheme": "./src/styles/globalTheme.ts",
+},
+remotes: {
+MenuHost: process.env.DEV_MENU,
+MenuListHost: process.env.DEV_MENU,
+BookingHost: process.env.DEV_BOOKING,
+FeedbackHost: process.env.DEV_FEEDBACK,
+},
+shared: {
+react: {
+singleton: true,
+eager: true,
+requiredVersion: packageJson.dependencies.react,
+},
+"react-dom": {
+singleton: true,
+eager: true,
+requiredVersion: packageJson.dependencies["react-dom"],
+},
+"@mui/material": "@mui/material",
+"@mui/icons-material": "@mui/icons-material",
+"@emotion/react": {
+singleton: true,
+requiredVersion: packageJson.dependencies["@emotion/react"],
+},
+"@emotion/styled": {
+singleton: true,
+requiredVersion: packageJson.dependencies["@emotion/styled"],
+},
+},
+})
+
+```
