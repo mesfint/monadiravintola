@@ -3,17 +3,17 @@ declare module 'FeedbackHost/ReviewCarousel' {
   export default ReviewCarousel;
 }
 
-declare module 'MenuHost/Hero' {
+declare module 'menu/Hero' {
   const Hero: React.ComponentType;
   export default Hero;
 }
 
-declare module 'MenuHost/Menu' {
+declare module 'menu/Menu' {
   const Menu: React.ComponentType;
   export default Menu;
 }
 
-declare module 'BookingHost/BookingModal' {
+declare module 'booking/BookingModal' {
   export interface BookingModalProps {
     open: boolean;
     onClose: () => void;
@@ -21,4 +21,9 @@ declare module 'BookingHost/BookingModal' {
   
   const BookingModal: React.ComponentType<BookingModalProps>;
   export default BookingModal;
+}
+
+declare module "feedback/ReviewCarousel" {
+  const ReviewCarousel: React.ComponentType;
+  export default ReviewCarousel;
 }

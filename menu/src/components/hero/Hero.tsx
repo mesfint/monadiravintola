@@ -11,13 +11,13 @@ interface BannerItem {
 
 const banners: BannerItem[] = [
   {
-    image: "http://localhost:3001/assets/bg/banner1.png",
+    image: "http://localhost:3001/assets/bg/banner1.jpg",
   },
   {
-    image: "http://localhost:3001/assets/bg/banner2.png",
+    image: "http://localhost:3001/assets/bg/banner2.jpg",
   },
   {
-    image: "http://localhost:3001/assets/bg/banner3.png",
+    image: "http://localhost:3001/assets/bg/banner3.jpg",
   }
 ];
 
@@ -82,6 +82,7 @@ const Hero: FC = () => {
               alt={`Banner ${index + 1}`}
               loading={index === 0 ? "eager" : "lazy"}
             />
+           
           </Box>
         ))}
       </Carousel>

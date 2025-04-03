@@ -4,9 +4,9 @@ import { ErrorBoundary } from "react-error-boundary";
 
 
 
-const Hero = lazy(() => import("MenuHost/Hero"));
-const Menu = lazy(() => import("MenuHost/Menu"));
-const ReviewCarousel = lazy(() => import("FeedbackHost/ReviewCarousel"));
+const Hero = lazy(() => import("menu/Hero"));
+const Menu = lazy(() => import("menu/Menu"));
+const ReviewCarousel = lazy(() => import("feedback/ReviewCarousel"));
 //const reviewsData = lazy(() => import("FeedbackHost/reviewsData"));
 
 

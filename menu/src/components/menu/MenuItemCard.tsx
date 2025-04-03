@@ -57,7 +57,7 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
       <StyledCard viewType={viewType}>
       <CardMedia
   component="img"
-  image={imageError ? '/assets/placeholder.png' : getImagePath(item.image)}
+  image={imageError ? '/assets/placeholder.jpg' : getImagePath(item.image)}
   alt={item.name}
   onError={() => setImageError(true)}
   sx={viewType === 'grid' ? {

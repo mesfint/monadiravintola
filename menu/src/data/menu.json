@@ -32,7 +32,7 @@
           {
             "name": "PROSCIUTTO",
             "price": 15.00,
-            "image": "/assets/pizza4.jpg",
+            "image": "/assets/pizza4.png",
             "description": {
               "english": "San Marzano tomato sauce, mozzarella di Agerola, arugula, prosciutto crudo, and parmesan",
               "finnish": "San Marzano tomaattikastike, mozzarella di Agerola, rucola, prosciutto crudo & parmesan"

@@ -17,9 +17,6 @@ import { styled } from '@mui/material/styles';
 import { FC, lazy, Suspense, useState } from 'react';
 import logoPath from "../../assets/LOGO.png";
 
-const BookingModal = lazy(() => import("BookingHost/BookingModal"));
-
-
 
 
 
@@ -53,6 +50,13 @@ const Header: FC = () => {
   const [bookingOpen, setBookingOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+
+  const BookingModal = lazy(() => import("booking/BookingModal"));
+// console.log('DEV_BOOKING:', process.env.DEV_BOOKING);
+
+
+
 
   const handleMenuItemClick = (item: string) => {
     if (item === 'Book Table') {

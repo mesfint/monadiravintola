@@ -9,14 +9,16 @@ dotenv.config();
 const packageJson = require("../package.json");
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDemoMode = process.env.DEMO_MODE === 'true';
+
 
 const getRemoteUrls = () => {
   if (isDevelopment) {
     return {
-      MenuHost: process.env.DEV_MENU,
-      MenuListHost: process.env.DEV_MENU,
-      BookingHost: process.env.DEV_BOOKING,
-       FeedbackHost: process.env.DEV_FEEDBACK,
+          // Only include necessary remotes for demo
+      menu: process.env.DEV_MENU,
+      booking: process.env.DEV_BOOKING,
+       feedback: process.env.DEV_FEEDBACK,
        
     };
   }
@@ -44,7 +46,11 @@ module.exports = (env, argv) => {
       static: {
         directory: path.join(__dirname, "dist"),
       },
+      watchFiles: ['./src/**/*', 'dist/sw.js'],
       hot: true,
+      devMiddleware: {
+        writeToDisk: true, // Ensures sw.js is written to disk
+      },
     },
 
     resolve: {
@@ -54,6 +60,16 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
+          test: /sw\.(js|ts)$/,
+          exclude: /node_modules/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-typescript']
+          }
+        }
+      ],
           test: /\.(js|jsx|tsx|ts)$/,
           exclude: /node_modules/,
           use: "babel-loader",
@@ -98,7 +114,16 @@ module.exports = (env, argv) => {
           "./GlobalTheme": "./src/styles/globalTheme.ts",
 
         },
-        remotes: getRemoteUrls(),
+        remotes: isDemoMode ? 
+         {
+            // Only include necessary remotes for demo
+            menu: `MenuHost@${process.env.DEV_MENU}/remoteEntry.js`,
+         // MenuListHost: 'MenuListHost@http://localhost:3002/remoteEntry.js',
+          //BookingHost: 'BookingHost@http://localhost:3003/remoteEntry.js',
+          feedback: `FeedbackHost@${process.env.DEV_FEEDBACK}/remoteEntry.js`,
+         }
+         // All remotes
+         : getRemoteUrls(),
         shared: {
           react: {
             singleton: true,
@@ -112,6 +137,14 @@ module.exports = (env, argv) => {
           },
           "@mui/material": "@mui/material", 
           "@mui/icons-material": "@mui/icons-material",
+          "@emotion/react": {
+            singleton: true,
+            requiredVersion: packageJson.dependencies["@emotion/react"],
+          },
+          "@emotion/styled": {
+            singleton: true,
+            requiredVersion: packageJson.dependencies["@emotion/styled"],
+          },
           
 
 
@@ -131,7 +164,8 @@ module.exports = (env, argv) => {
           { 
             from: 'public/assets',
             to: 'assets'
-          }
+          },
+      
         ]
       })
 

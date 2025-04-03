@@ -1,14 +1,14 @@
 import { Box } from '@mui/material';
 import { FC } from 'react';
 import { globalTheme } from '../../styles/globalTheme';
-import AppContainer from '../AppContainer';
 import Footer from './Footer';
 import Header from './Header';
-import RestaurantStory from './RestaurantStory';
 
+interface LayoutProps {
+  children: React.ReactNode;
+}
 
-
-const Layout: FC = () => {
+const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <Box
       sx={{
@@ -27,8 +27,9 @@ const Layout: FC = () => {
           paddingTop: { xs: '56px', sm: '64px' }, // Adjust based on header height
         }}
       >
-        <AppContainer />
-        <RestaurantStory />
+        {children}
+        {/* <AppContainer />
+        <RestaurantStory /> */}
 
       </Box>
       <Footer />

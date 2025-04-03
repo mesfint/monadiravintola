@@ -3,7 +3,7 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable",  "WebWorker"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -22,5 +22,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "../feedback/src/menuTheme.tsx"]
+  "paths": {
+   "MenuHost/*": ["./src/declaration.d.ts"],
+  "FeedbackHost/*": ["./src/declaration.d.ts"]
+  },
+  "include": ["src/**/*", "../feedback/src/menuTheme.tsx"],
+  "exclude": [
+    "node_modules"
+  ]
 }
