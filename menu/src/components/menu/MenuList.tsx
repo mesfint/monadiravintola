@@ -28,6 +28,7 @@ const MenuList: FC<MenuListProps> = ({ language }) => {
                 <MenuItemCard 
                   item={item} 
                   viewType={viewType}
+                  language={language}
                 />
               </Box>
             </Grid>
@@ -55,6 +56,7 @@ const MenuList: FC<MenuListProps> = ({ language }) => {
           key={index}
           item={item} 
           viewType={viewType}
+          language={language}
         />
       ))}
     </Box>

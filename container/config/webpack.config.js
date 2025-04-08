@@ -123,7 +123,7 @@ module.exports = (env, argv) => {
           "./App": "./src/App", // Expose the container's main App
           "./GlobalTheme": "./src/styles/globalTheme.ts",
           "./LanguageContext": "./src/context/LanguageContext",
-          
+          "./translations": "./src/utils/translations.ts",
         },
         remotes: {
           ...getRemoteUrls(),

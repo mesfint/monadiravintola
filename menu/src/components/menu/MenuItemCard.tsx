@@ -7,6 +7,7 @@ import {
   styled,
   Typography
 } from '@mui/material';
+import { translations } from 'container/translations';
 import { FC, useState } from 'react';
 import { MenuItem, ViewType } from '../../../types';
 import useMenu from '../../utils/useMenu';
@@ -210,8 +211,8 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType, language }) => {
               width: { xs: '100%', sm: 'auto' } // Full width on mobile
             }}
           >
-            Order on Wolt
-          </Button>
+        {translations?.[language]?.orderButton || 'Order on Wolt'}
+        </Button>
         </Box>
       </CardContent>
     </StyledCard>

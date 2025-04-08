@@ -10,7 +10,7 @@ interface MenuProps {
   toggleLanguage: () => void;
 }
 
-const Menu: FC<MenuProps> = ({ language, toggleLanguage }) => {
+const Menu: FC<MenuProps> = ({ language }) => {
   console.log("Menu component rendered");
   return (
       <MenuProvider>

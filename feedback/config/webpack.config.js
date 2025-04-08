@@ -43,6 +43,10 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'feedback',
       filename: 'remoteEntry.js',
+      remotes: {
+        container: `container@http://localhost:3000/remoteEntry.js?t=${Date.now()}`, 
+  
+       },
       exposes: {
         './ReviewCarousel': './src/components/ReviewCarousel.tsx',
         './reviewsData': './src/data/reviews.ts',

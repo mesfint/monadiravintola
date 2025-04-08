@@ -9,11 +9,15 @@ type MenuProps = {
   language: 'english' | 'finnish';
   toggleLanguage: () => void;
 };
+type ReviewCarouselProps = {
+  language: 'english' | 'finnish';
+};
 
 const Hero = lazy(() => import("menu/Hero"));
 const Menu = lazy(() => import("menu/Menu")) as FC<MenuProps>;
-const ReviewCarousel = lazy(() => import("feedback/ReviewCarousel"));
+const ReviewCarousel = lazy(() => import("feedback/ReviewCarousel")) as FC<ReviewCarouselProps>;
 //const reviewsData = lazy(() => import("FeedbackHost/reviewsData"));
+const { language} = useLanguage()
 
 
 const ErrorFallback = () => (
@@ -39,7 +43,7 @@ const AppContainer = () => {
           <Hero />
           <Menu language={language} toggleLanguage={toggleLanguage} />
           <RestaurantStory />
-          <ReviewCarousel />
+          <ReviewCarousel language={language} />
         </Box>
       </Suspense>
     </ErrorBoundary>

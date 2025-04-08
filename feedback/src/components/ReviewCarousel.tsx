@@ -2,6 +2,7 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import StarIcon from '@mui/icons-material/Star';
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { translations } from 'container/translations';
 import { FC, useEffect, useState } from 'react';
 import { reviews as reviewsData } from '../data/reviews'; // Import the reviews data
 import { Review } from '../types/review';
@@ -77,13 +78,13 @@ const ReviewContent = styled(Box)(({ theme }) => ({
 
 interface ReviewCarouselProps {
   reviews?: Review[];
+  language: 'english' | 'finnish';
 }
 
-const ReviewCarousel: FC<ReviewCarouselProps> = ({ reviews = reviewsData }) => {
+const ReviewCarousel: FC<ReviewCarouselProps> = ({ reviews = reviewsData, language }) => {
   const [position, setPosition] = useState(0);
   const [clonedReviews, setClonedReviews] = useState<Review[]>([]);
   const [isVisible, setIsVisible] = useState(false);
-
 
   useEffect(() => {
     //wait for the component to be mounted
@@ -138,7 +139,7 @@ const ReviewCarousel: FC<ReviewCarouselProps> = ({ reviews = reviewsData }) => {
           fontWeight: 600
         }}
       >
-        Customer Reviews
+        {translations[language].customerReviews}
       </Typography>
 
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>

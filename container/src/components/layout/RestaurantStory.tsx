@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import { memo } from "react";
 import { useLanguage } from '../../context/LanguageContext';
+import { translations } from '../../utils/translations';
+
 const fadeIn = keyframes`
   0% {
     opacity: 0;
@@ -215,7 +217,7 @@ const RestaurantStory = () => {
                 fontSize: { xs: "0.9rem", sm: "1rem" },
               }}
             >
-              Book a Table
+             {translations[language].bookTable}
             </Button>
             <Button
               variant="outlined"
@@ -233,7 +235,7 @@ const RestaurantStory = () => {
                 fontSize: { xs: "0.9rem", sm: "1rem" },
               }}
             >
-              Contact Us
+               {translations[language].footer.contact}
             </Button>
           </Box>
 
@@ -257,7 +259,9 @@ const RestaurantStory = () => {
                 fontSize: { xs: "1.25rem", sm: "1.5rem" },
               }}
             >
-              Opening Hours
+            <Typography variant="h3" component="h2" gutterBottom>
+            {translations[language].openingHours}
+          </Typography>
             </Typography>
             <Box
               sx={{
@@ -266,18 +270,18 @@ const RestaurantStory = () => {
                 gap: 1,
               }}
             >
-              <Typography sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-                Monday: Closed
-              </Typography>
-              <Typography sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-                Tuesday - Wednesday: 16:00 - 22:00
-              </Typography>
-              <Typography sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-                Thursday - Saturday: 11:00 - 22:00
-              </Typography>
-              <Typography sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-                Sunday: 11:00 - 21:00
-              </Typography>
+              <Typography>
+              {translations[language].days.monday}: {translations[language].closed}
+            </Typography>
+            <Typography>
+              {`${translations[language].days.tuesday} - ${translations[language].days.wednesday}: 16:00 - 22:00`}
+            </Typography>
+            <Typography>
+              {`${translations[language].days.thursday} - ${translations[language].days.saturday}: 11:00 - 22:00`}
+            </Typography>
+            <Typography>
+              {`${translations[language].days.sunday}: 11:00 - 21:00`}
+            </Typography>
             </Box>
           </Box>
         </Container>

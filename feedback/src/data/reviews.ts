@@ -73,16 +73,17 @@ export const reviews: Review[] = [
     date: 'a year ago',
     source: 'Google review'
   },
+ 
   {
     id: '5',
-    author: 'Sean Atherton',
+    author: 'Max Jhon',
     text: "I ordered my food for delivery, I am unable to rate the Atmosphere. From order to delivery, service was faster than expected. The pizza itself was excellent. Crust has a nice little char to it, perfectly cooked. Sauce to cheese ratio was perfect to my liking. Pepperoni had a nice little spicy kick. I really enjoyed this pizza quite a bit. Really wish is was pre-sliced, but I am from USA so kinda used to the pizza pre-sliced. Still didn't take away from the overall experience. Great Service, very fresh and excellent pizza. Thank you very much for everyone involved. Would order again!",
     ratings: {
       food: 5,
       service: 5,
       atmosphere: 5
     },
-    date: 'a year ago',
+    date: 'Seven month ago',
     source: 'Google review'
   },
 ];
