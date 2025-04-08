@@ -17,7 +17,9 @@ export const translations = {
     footer: {
       contact: "Contact Us",
       address: "Address",
-      followUs: "Follow Us"
+      followUs: "Follow Us",
+      aboutUs: "About Us",
+      aboutUsDescription: "Monadi Ravintola serves authentic Italian pizzas in a warm, welcoming atmosphere."
     }
   },
   finnish: {
@@ -38,7 +40,9 @@ export const translations = {
     footer: {
       contact: "Ota yhteyttä",
       address: "Osoite",
-      followUs: "Seuraa meitä"
+      followUs: "Seuraa meitä",
+      aboutUs: "Tietoa meistä",
+      aboutUsDescription: "Monadi Ravintola tarjoaa authenttisia italialaisia pizzoja lämpimässä, tervetulleisessa ilmapiirissä."
     }
   }
 } as const; 

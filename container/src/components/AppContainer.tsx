@@ -16,8 +16,8 @@ type ReviewCarouselProps = {
 const Hero = lazy(() => import("menu/Hero"));
 const Menu = lazy(() => import("menu/Menu")) as FC<MenuProps>;
 const ReviewCarousel = lazy(() => import("feedback/ReviewCarousel")) as FC<ReviewCarouselProps>;
+//const ReviewCarousel = lazy(() => import("feedback/ReviewCarousel")) as FC<ReviewCarouselProps>;
 //const reviewsData = lazy(() => import("FeedbackHost/reviewsData"));
-const { language} = useLanguage()
 
 
 const ErrorFallback = () => (

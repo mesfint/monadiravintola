@@ -1,6 +1,8 @@
 import { Box, Container, Link, styled, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { FC } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import { translations } from '../../utils/translations';
 
 // Optional: Create a styled component for the content sections if needed
 const FooterSection = styled(Box)(({ theme }) => ({
@@ -11,6 +13,7 @@ const FooterSection = styled(Box)(({ theme }) => ({
 }));
 
 const Footer: FC = () => {
+  const { language } = useLanguage();
   return (
     <Box
       component="footer"
@@ -29,11 +32,11 @@ const Footer: FC = () => {
           <Grid size={{ xs: 12, sm: 4 }}>
             <FooterSection>
               <Typography variant="h6" color="text.primary" gutterBottom>
-                About Us
+                {translations[language].footer.aboutUs}
               </Typography>
               <Typography variant="body2">
-                Monadi Ravintola serves authentic Italian pizzas in a warm, 
-                welcoming atmosphere.
+                
+                {translations[language].footer.aboutUsDescription}
               </Typography>
             </FooterSection>
           </Grid>
@@ -41,7 +44,7 @@ const Footer: FC = () => {
           <Grid size={{ xs: 12, sm: 4 }}>
             <FooterSection>
               <Typography variant="h6" color="text.primary" gutterBottom>
-                Contact
+                {translations[language].footer.contact}
               </Typography>
               <Typography variant="body2">
               Saarnraiviontie 1
@@ -58,7 +61,7 @@ const Footer: FC = () => {
           <Grid size={{ xs: 12, sm: 4 }}>
             <FooterSection>
               <Typography variant="h6" color="text.primary" gutterBottom>
-                Opening Hours
+                {translations[language].openingHours}
               </Typography>
               <Typography variant="body2">
               Monday Closed

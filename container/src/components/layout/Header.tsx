@@ -205,6 +205,7 @@ const Header: FC = () => {
             sx={{
               minWidth: 'auto',
               px: 1,
+              py:0.5,
               color: 'white',
               borderColor: 'white',
               '&:hover': {
