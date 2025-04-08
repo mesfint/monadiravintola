@@ -9,11 +9,14 @@ import {
 } from '@mui/material';
 import { FC, useState } from 'react';
 import { MenuItem, ViewType } from '../../../types';
-import { useMenu } from '../../utils/useMenu';
+import useMenu from '../../utils/useMenu';
+
+
 
 interface MenuItemCardProps {
   item: MenuItem;
   viewType: ViewType;
+  language: 'english' | 'finnish';
 }
 
 const StyledCard = styled(Card, {
@@ -34,8 +37,8 @@ const StyledCard = styled(Card, {
   },
 }));
 
-const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
-  const { language, activeCategory } = useMenu();
+const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType, language }) => {
+  const {  activeCategory } = useMenu();
   const [imageError, setImageError] = useState(false);
   const isDrink = activeCategory === 'drinks';
 
@@ -132,7 +135,7 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
             )}
           </Box>
           
-          {(!isDrink || item.description?.[language]) && (
+          {(!isDrink || item.description?.english || item.description?.finnish) && (
             <Typography 
               variant="body2" 
               sx={{ 
@@ -145,7 +148,7 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType }) => {
                 minHeight: viewType === 'grid' ? (isDrink ? '40px' : '60px') : 'auto',
               }}
             >
-              {item.description[language] || ' '}
+            {item.description?.[language as keyof typeof item.description] || item.description?.english || ''}
             </Typography>
           )}
         </Box>

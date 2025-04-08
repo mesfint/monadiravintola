@@ -1,11 +1,17 @@
 import { Box, CircularProgress } from "@mui/material";
-import { Suspense, lazy } from "react";
+import { FC, Suspense, lazy } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useLanguage } from "../context/LanguageContext";
+import RestaurantStory from "./layout/RestaurantStory";
 
 
+type MenuProps = {
+  language: 'english' | 'finnish';
+  toggleLanguage: () => void;
+};
 
 const Hero = lazy(() => import("menu/Hero"));
-const Menu = lazy(() => import("menu/Menu"));
+const Menu = lazy(() => import("menu/Menu")) as FC<MenuProps>;
 const ReviewCarousel = lazy(() => import("feedback/ReviewCarousel"));
 //const reviewsData = lazy(() => import("FeedbackHost/reviewsData"));
 
@@ -22,15 +28,19 @@ const LoadingFallback = () => (
   </Box>
 );
 
+
 const AppContainer = () => {
+  const { language, toggleLanguage } = useLanguage();
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Suspense fallback={<LoadingFallback />}>
-        <Hero />
-        <Menu />
-        <Suspense fallback={<LoadingFallback />}>
-        <ReviewCarousel />
-      </Suspense>
+        <Box component="main">
+          <Hero />
+          <Menu language={language} toggleLanguage={toggleLanguage} />
+          <RestaurantStory />
+          <ReviewCarousel />
+        </Box>
       </Suspense>
     </ErrorBoundary>
   );

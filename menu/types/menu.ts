@@ -22,6 +22,12 @@ export interface MenuCategories {
 export interface MenuData {
   menu: {
     categories: MenuCategories;
+    translatedMenu: TranslatedMenu;
+  };
+}
+export interface TranslatedMenu {
+  categories: {
+    [key: string]: MenuItem[];
   };
 }
 

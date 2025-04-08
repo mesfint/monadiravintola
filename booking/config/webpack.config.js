@@ -2,6 +2,13 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+const getContainerUrl = () => {
+  if (process.env.NODE_ENV !== 'production') {
+    return 'container@http://localhost:3000/remoteEntry.js';
+  }
+  return process.env.CONTAINER_URL;
+};
+
 module.exports = {
   entry: './src/main.tsx',
   mode: 'development',
@@ -38,8 +45,11 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'booking',
       filename: 'remoteEntry.js',
+      remotes: {
+        container: getContainerUrl(),
+      },
       exposes: {
-        './BookingModal': './src/components/BookingModal.tsx', 
+        './BookingModal': './src/components/BookingModal', 
       },
       shared: {
         react: { singleton: true, eager: true },

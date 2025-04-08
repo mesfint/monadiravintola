@@ -1,76 +1,71 @@
-import {
-  Box,
-  styled,
-  Tab,
-  Tabs,
-  useMediaQuery,
-  useTheme
-} from '@mui/material';
-import { FC } from 'react';
-import { CATEGORY_NAMES } from '../../../types';
-import { useMenu } from '../../utils/useMenu';
-import ViewToggle from './ViewToggle';
+import { Box, Tab, Tabs } from "@mui/material";
+import { FC } from "react";
+import { useTranslatedMenu } from "../../hooks/useTranslatedMenu";
+import useMenu from "../../utils/useMenu";
 
-const StyledTabs = styled(Tabs)(({ theme }) => ({
-  '& .MuiTabs-indicator': {
-    backgroundColor: '#D68240',
-    height: '2px',
-  },
-  '& .MuiTab-root': {
-    color: 'rgba(255, 255, 255, 0.7)',
-    textTransform: 'none',
-    fontSize: '1rem',
-    fontWeight: 500,
-    minWidth: 120,
-    '&.Mui-selected': {
-      color: '#D68240',
-    },
-    '&:hover': {
-      color: '#D68240',
-      opacity: 1,
-    },
-  },
-}));
+// Add type definition for translations
+type CategoryKey = keyof typeof categoryTranslations.english;
 
-const MenuCategories: FC = () => {
+
+const categoryTranslations = {
+  english: {
+    pizzas: "Pizzas",
+    whitePizzas: "White Pizzas",
+    kidsPizzas: "Kids Pizzas",
+    pastas: "Pastas",
+    desserts: "Desserts",
+    drinks: "Drinks",
+  },
+  finnish: {
+    pizzas: "Pizzat",
+    whitePizzas: "Valkoiset Pizzat",
+    kidsPizzas: "Lasten Pizzat",
+    pastas: "Pastat",
+    desserts: "Jälkiruoat",
+    drinks: "Juomat",
+  },
+} as const;
+
+interface MenuCategoriesProps {
+  language: 'english' | 'finnish';
+}
+
+const MenuCategories: FC<MenuCategoriesProps> = ({ language }) => {
   const { activeCategory, setActiveCategory } = useMenu();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const translatedMenu = useTranslatedMenu(language);
+  const categories = Object.keys(translatedMenu.categories);
+
+  
+  console.log('Current language in MenuCategories:', language);
+
 
   return (
-    <Box sx={{ 
-      width: '100%', 
-      mb: 4,
-      borderBottom: '1px solid rgba(255, 255, 255, 0.12)'
-    }}>
-      <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}>
-        <StyledTabs
-          value={activeCategory}
-          onChange={(_, newValue) => setActiveCategory(newValue)}
-          variant={isMobile ? "scrollable" : "standard"}
-          scrollButtons={isMobile ? "auto" : false}
-          allowScrollButtonsMobile
-        >
-          {Object.entries(CATEGORY_NAMES).map(([key, label]) => (
-            <Tab
-              key={key}
-              label={label}
-              value={key}
-              sx={{
-                color: 'white',
-                '&.Mui-selected': {
-                  color: '#D68240',
-                },
-              }}
-            />
-          ))}
-        </StyledTabs>
-        <ViewToggle />
-      </Box>
+    <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 4 }}>
+      <Tabs
+        value={categories.indexOf(activeCategory)}
+        onChange={(_, newValue) => setActiveCategory(categories[newValue])}
+        variant="scrollable"
+        scrollButtons="auto"
+        allowScrollButtonsMobile
+        sx={{
+          "& .MuiTab-root": {
+            color: "white",
+            "&.Mui-selected": {
+              color: "#D68240",
+            },
+          },
+          "& .MuiTabs-indicator": {
+            backgroundColor: "#D68240",
+          },
+        }}
+      >
+        {categories.map((category) => (
+          <Tab
+            key={category}
+            label={categoryTranslations[language as keyof typeof categoryTranslations][category as CategoryKey]}
+          />
+        ))}
+      </Tabs>
     </Box>
   );
 };

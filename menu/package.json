@@ -8,6 +8,7 @@
     "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.config.js",
     "build": "pnpm clean && cross-env NODE_ENV=production webpack --config config/webpack.config.js",
     "serve": "cross-env NODE_ENV=production serve dist -p 3001",
+    "test:env": "cross-env NODE_ENV=test node test.js",
     "deploy:full": "git add . && git commit -m \"UI build update\" && git push" ,
     "dev": "vite",
     "lint": "eslint .",
@@ -24,7 +25,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-material-ui-carousel": "^3.4.2",
-    "react-router-dom": "^7.1.1",
+   "react-router-dom": "6.30.0",
     "style-loader": "^4.0.0",
     "webpack-merge": "^6.0.1"
   },

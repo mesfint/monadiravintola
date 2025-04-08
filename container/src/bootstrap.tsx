@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import { measurePerformance } from './service-workers/performanceMetrics';
@@ -29,9 +28,9 @@ const mount = () => {
   const root = createRoot(container);
 
   root.render(
-    <StrictMode>
+    
       <App />
-    </StrictMode>
+    
   );
 };
 

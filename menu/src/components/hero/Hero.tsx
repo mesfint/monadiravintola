@@ -1,8 +1,9 @@
 // src/components/Hero.tsx
 import { Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import { FC } from "react";
+import { FC, memo } from "react";
 import Carousel from "react-material-ui-carousel";
+
 
 // Simplified interface for banner items
 interface BannerItem {
@@ -37,6 +38,7 @@ const BannerImage = styled('img')({
 });
 
 const Hero: FC = () => {
+  console.log("Hero component rendered");
   return (
     <HeroWrapper>
       <Carousel
@@ -90,7 +92,7 @@ const Hero: FC = () => {
   );
 };
 
-export default Hero;
+export default memo(Hero);//avoids unneccssary renders
 
 
 
