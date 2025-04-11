@@ -103,9 +103,10 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType, language }) => {
         <Box>
           <Box sx={{ 
             display: 'flex', 
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            mb: { xs: 0.5, sm: 1 } 
+            //justifyContent: 'space-between',
+            flexDirection: 'column',
+            alignItems: { xs: 'center' ,sm:'flex-start'},
+            //mb: { xs: 0.5, sm: 1 } 
           }}>
             <Typography 
               variant="h6" 
@@ -114,7 +115,7 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType, language }) => {
                 fontSize: {
                   xs: isDrink ? '0.9rem' : '1rem',
                   sm: isDrink ? '1rem' : '1.1rem',
-                  md: isDrink ? '1.1rem' : '1.2rem'
+                  //md: isDrink ? '1.1rem' : '1.2rem'
                 },
                 flex: 1
               }}
@@ -128,7 +129,8 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType, language }) => {
                   color: 'grey.500',
                   ml: 1,
                   whiteSpace: 'nowrap',
-                  fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.8rem' }
+                  fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.8rem' },
+                  mt: -0.5
                 }}
               >
                 {item.volume}
@@ -157,14 +159,20 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType, language }) => {
         <Box 
           sx={{ 
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
+            flexDirection: { xs: 'column', sm: 'row' }, 
+            gap: { xs: 2, sm: 2 }, 
+            justifyContent: { xs: 'flex-start', sm: 'space-between' },
+            alignItems: { xs: 'flex-start', sm: 'center' }, 
             mt: isDrink ? 1 : 'auto'
+            
           }}
         >
           <Box sx={{
             display: 'flex',
             flexDirection: 'column',
+            width: { xs: '100%', sm: 'auto' }, 
+            mb: { xs: 1, sm: 0 } ,
+            minWidth: { sm: '100px' }
             
           }}>
             <Typography 
@@ -186,7 +194,7 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType, language }) => {
                   color: 'grey.500',
                   display: 'block',
                   fontSize: '0.75rem',
-                  mt: -0.5
+                  
                 }}
               >
                 ({item.pricePerLiter.toFixed(2)} €/l)
@@ -204,11 +212,12 @@ const MenuItemCard: FC<MenuItemCardProps> = ({ item, viewType, language }) => {
               },
               fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.9rem' },
               padding: { 
-                xs: '2px 6px', 
+                xs: '2px 12px', 
                 sm: '4px 10px', 
                 md: '8px 16px' 
               },
-              width: { xs: '100%', sm: 'auto' } // Full width on mobile
+              width: '100%', // Full width on mobile
+              maxWidth: { sm : '200px'}
             }}
           >
         {translations?.[language]?.orderButton || 'Order on Wolt'}

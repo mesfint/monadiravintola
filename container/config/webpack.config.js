@@ -49,6 +49,7 @@ module.exports = (env, argv) => {
         directory: path.join(__dirname, "dist"),
       },
       headers: {
+        "Service-Worker-Allowed": "/",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods":
           "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -182,6 +183,9 @@ module.exports = (env, argv) => {
           },
         ],
       }),
+     
     ],
   };
 };
+
+

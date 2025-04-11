@@ -31,7 +31,6 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('english');
 
   const toggleLanguage = () => {
-    console.log('Language toggled to:', language === 'english' ? 'finnish' : 'english');
     setLanguage(prev => prev === 'english' ? 'finnish' : 'english');
   };
 

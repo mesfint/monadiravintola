@@ -4,7 +4,7 @@ import pizzaData from '../data/menu.json'; // Adjust the path as needed to your 
 
 
 const PizzaGrid = () => {
-  const pizzas = pizzaData.menu.categories.pizza;
+  const pizzas = pizzaData.menu.categories.pizzas
   console.log("pizzas",  pizzaData.menu.categories);
 
   return (

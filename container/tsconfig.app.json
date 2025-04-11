@@ -26,7 +26,7 @@
    "MenuHost/*": ["./src/declaration.d.ts"],
   "FeedbackHost/*": ["./src/declaration.d.ts"]
   },
-  "include": ["src/**/*", "../feedback/src/menuTheme.tsx"],
+  "include": ["src/**/*", "../feedback/src/menuTheme.tsx", "scripts"],
   "exclude": [
     "node_modules"
   ]

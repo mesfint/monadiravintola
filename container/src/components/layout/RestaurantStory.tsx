@@ -79,7 +79,6 @@ const RestaurantStory = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
    const { language } = useLanguage();
-   console.log("RestaurantStory component rendered");
   const storyText = {
     english: {
       title: "Our Story",

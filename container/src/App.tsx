@@ -5,7 +5,6 @@ import AppContainer from "./components/AppContainer";
 import DemoContainer from "./components/DemoContainer";
 import Layout from "./components/layout/Layout";
 import NotFound from "./components/NotFound";
-import { SystemCheck } from "./components/SystemCheck";
 import { LanguageProvider } from './context/LanguageContext';
 import globalTheme from "./styles/globalTheme";
 import { ErrorBoundary } from "./utils/errorBoundary";
@@ -23,7 +22,7 @@ const App = () => {
               element={
                 <Layout>
                   <AppContainer />
-                  <SystemCheck />
+                  {/* <SystemCheck /> */}
                 </Layout>
               }
             />

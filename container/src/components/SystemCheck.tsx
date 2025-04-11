@@ -56,11 +56,31 @@ export const SystemCheck: React.FC = () => {
       cacheUsage: navEntry.transferSize === 0 ? 'From Cache' : 'Network'
     };
 
+    const swFileStatus = await checkServiceWorkerFile();
+    console.log('Service Worker File Status:', swFileStatus);
+
     setStatus({
       serviceWorker: swStatus,
       caches: cacheStatus,
       performance: perfStatus
     });
+  };
+
+  const checkServiceWorkerFile = async () => {
+    try {
+      const response = await fetch('/sw.js');
+      const text = await response.text();
+      return {
+        exists: response.ok,
+        size: text.length,
+        status: response.status
+      };
+    } catch (error:any) {
+      return {
+        exists: false,
+        error: error.message
+      };
+    }
   };
 
   return (

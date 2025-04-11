@@ -54,11 +54,22 @@ const Header: FC = () => {
 
   const BookingModal = lazy(() => import("booking/BookingModal"));
 
-  const handleMenuItemClick = (item: string) => {
+  const handleMenuItemClick = (item: string, isMobileView: boolean) => {
     if (item === "Book Table") {
       setBookingOpen(true);
+    } else {
+      // Scroll to section
+      const sectionId = item.toLowerCase().replace(' ', '-');
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
-    handleDrawerToggle();
+    
+    // Only toggle drawer if on mobile
+    if (isMobileView) {
+      handleDrawerToggle();
+    }
   };
 
   const menuItems = ["Menu", "Book Table", "Feedback"];
@@ -97,7 +108,7 @@ const Header: FC = () => {
         {menuItems.map((item) => (
           <ListItem
             key={item}
-            onClick={() => handleMenuItemClick(item)}
+            onClick={() => handleMenuItemClick(item, true)}
             sx={{
               justifyContent: "center",
               py: 2,
@@ -170,7 +181,7 @@ const Header: FC = () => {
               {menuItems.map((item) => (
                 <Typography
                   key={item}
-                  onClick={() => handleMenuItemClick(item)}
+                  onClick={() => handleMenuItemClick(item, false)}
                   sx={{
                     cursor: "pointer",
                     color: "white",

@@ -19,12 +19,18 @@ export const registerServiceWorker = () => {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
       try {
+        const swResponse = await fetch('/sw.js');
+        if (!swResponse.ok) {
+          throw new Error(`Service Worker file not found: ${swResponse.status}`);
+        }
         // Register the service worker from the root directory
-        const registration = await navigator.serviceWorker.register('/sw.js');
-        console.log('%c✅ SW Registration successful', logStyles.success);
-        console.group('Service Worker Details:');
-        console.log('📍 Scope:', registration.scope);
-        console.log('🔄 Current State:', registration.active?.state || 'initializing');
+        const registration = await navigator.serviceWorker.register('/sw.js',{
+          scope: '/'
+        });
+         console.group('Service Worker Registration Details');
+        console.log('Registration successful:', registration);
+        console.log('Scope:', registration.scope);
+        console.log('State:', registration.active?.state || 'initializing');
         console.groupEnd();
         
         // Store that SW is enabled
@@ -113,10 +119,11 @@ export const unregisterServiceWorker = async () => {
       
       localStorage.setItem('swEnabled', 'false');
       
-    } catch (error) {
-      console.group('%c❌ Service Worker Unregistration Error', logStyles.error);
-      console.error('Error details:', error);
-      console.trace('Stack trace:');
+    } catch (error:any) {
+      console.group('%c❌ Service Worker Registration Failed', 'background: #f44336; color: white;');
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
       console.groupEnd();
     }
   }

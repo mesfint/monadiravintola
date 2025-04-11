@@ -97,8 +97,8 @@ Please reply to confirm this booking.
     
 
     // Log the test information
-    console.log('Sending booking to:', TEST_CONFIG.ACTIVE_NUMBER);
-    console.log('Message:', decodeURIComponent(message));
+    // console.log('Sending booking to:', TEST_CONFIG.ACTIVE_NUMBER);
+    // console.log('Message:', decodeURIComponent(message));
 
     // Open WhatsApp in a new window
     window.open(whatsappUrl, '_blank');

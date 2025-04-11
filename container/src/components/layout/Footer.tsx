@@ -34,10 +34,11 @@ const Footer: FC = () => {
               <Typography variant="h6" color="text.primary" gutterBottom>
                 {translations[language].footer.aboutUs}
               </Typography>
-              <Typography variant="body2">
-                
+              <Box>
+                <Typography>
                 {translations[language].footer.aboutUsDescription}
-              </Typography>
+                </Typography>
+              </Box>
             </FooterSection>
           </Grid>
           
@@ -46,15 +47,22 @@ const Footer: FC = () => {
               <Typography variant="h6" color="text.primary" gutterBottom>
                 {translations[language].footer.contact}
               </Typography>
-              <Typography variant="body2">
+              <Box>
+                <Typography>
               Saarnraiviontie 1
-              <br />
+
+                </Typography>
+              <Typography>
+
               02770 Espoo
-                <br />
-                 Finland
-                <br />
-                Tel: +358 401 247 491
               </Typography>
+                <Typography>
+               {translations[language].footer.country}
+                </Typography>
+                <Typography>
+               {translations[language].footer.tel}: +358 401 247 491
+              </Typography>
+              </Box>
             </FooterSection>
           </Grid>
           
@@ -63,13 +71,18 @@ const Footer: FC = () => {
               <Typography variant="h6" color="text.primary" gutterBottom>
                 {translations[language].openingHours}
               </Typography>
-              <Typography variant="body2">
-              Monday Closed
-                <br />
-                TU - WE: 16:00 - 22:00                <br />
-                THR - SAT: 11:00 - 22:00               <br />
-                SUN: 11:00 - 21:00
-              </Typography>
+              <Typography>
+              {translations[language].days.monday}: {translations[language].closed}
+            </Typography>
+            <Typography>
+              {`${translations[language].days.tuesday} - ${translations[language].days.wednesday}: 16:00 - 22:00`}
+            </Typography>
+            <Typography>
+              {`${translations[language].days.thursday} - ${translations[language].days.saturday}: 11:00 - 22:00`}
+            </Typography>
+            <Typography>
+              {`${translations[language].days.sunday}: 11:00 - 21:00`}
+            </Typography>
             </FooterSection>
           </Grid>
         </Grid>
